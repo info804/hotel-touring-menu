@@ -297,6 +297,13 @@ main {
   border-radius: 26px 22px 26px 24px / 22px 26px 22px 26px;
 }
 
+/* Cutlery / tall SVG icons — taller oval container */
+.card-icon--tall {
+  width: 48px;
+  height: 62px;
+  border-radius: 26px 22px 26px 24px / 22px 26px 22px 26px;
+}
+
 .menu-card:hover .card-icon {
   transform: rotate(-4deg) scale(1.05);
 }
