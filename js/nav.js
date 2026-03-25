@@ -1,6 +1,7 @@
 /**
- * nav.js — Smooth page exit transitions
- * Uses event delegation so it catches all links, including dynamically created ones.
+ * nav.js — Smooth page transitions
+ * Exit: header slides up + fades, main slides down + fades.
+ * Entrance: handled by CSS headerIn / pageIn animations.
  */
 (function () {
   var navigating = false;
@@ -12,7 +13,6 @@
     if (!link) return;
 
     var href = link.getAttribute('href');
-    // Skip anchors, tel, mailto, external URLs
     if (!href ||
         href.charAt(0) === '#' ||
         href.indexOf('://') !== -1 ||
@@ -22,13 +22,22 @@
     e.preventDefault();
     navigating = true;
 
-    var main = document.querySelector('main');
+    var header = document.querySelector('.site-header');
+    var main   = document.querySelector('main');
+    var EASE   = 'cubic-bezier(0.25,0.46,0.45,0.94)';
+    var DUR    = '0.2s';
+
+    if (header) {
+      header.style.transition = 'opacity ' + DUR + ' ' + EASE + ', transform ' + DUR + ' ' + EASE;
+      header.style.opacity    = '0';
+      header.style.transform  = 'translateY(-8px)';
+    }
     if (main) {
-      main.style.transition = 'opacity 0.18s ease, transform 0.18s ease';
+      main.style.transition = 'opacity ' + DUR + ' ' + EASE + ', transform ' + DUR + ' ' + EASE;
       main.style.opacity    = '0';
-      main.style.transform  = 'translateY(8px)';
+      main.style.transform  = 'translateY(10px)';
     }
 
-    setTimeout(function () { window.location.href = href; }, 200);
-  }, true); // capture phase — fires before child handlers
+    setTimeout(function () { window.location.href = href; }, 220);
+  }, true);
 })();

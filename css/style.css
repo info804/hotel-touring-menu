@@ -68,14 +68,22 @@ body {
   overflow-x: clip;
 }
 
-/* Page-enter animation */
+/* Page-enter animations */
+@keyframes headerIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 @keyframes pageIn {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
+.site-header {
+  animation: headerIn 0.28s var(--ease) both;
+}
 main {
-  animation: pageIn 0.38s var(--ease) both;
+  /* slight delay so header lands first */
+  animation: pageIn 0.36s var(--ease) 0.06s both;
 }
 
 /* ============================================================
@@ -130,24 +138,29 @@ body { top: 0 !important; margin-top: 0 !important; }
 /* Language-switch pill — top-right of main header */
 .lang-switch {
   position: absolute;
-  top: 12px;
-  right: 14px;
+  top: 13px;
+  right: 16px;
   z-index: 10;
-  background: rgba(255,255,255,0.18);
-  border: 1.5px solid rgba(255,255,255,0.55);
-  border-radius: 8px 6px 8px 7px / 7px 8px 6px 8px;
-  color: white;
-  font-family: var(--font-body);
-  font-size: 0.68rem;
+  background: #FDFAF4;
+  border: 2px solid #2C1810;
+  border-radius: 20px 18px 20px 19px / 19px 20px 18px 20px;
+  box-shadow: 2px 2px 0 #2C1810;
+  color: #2C1810;
+  font-family: var(--font-hand);
+  font-size: 0.9rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  padding: 4px 9px;
+  padding: 4px 11px;
   cursor: pointer;
   text-transform: uppercase;
-  transition: background var(--t-fast) var(--ease);
+  transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
 }
 .lang-switch:hover {
-  background: rgba(255,255,255,0.32);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 #2C1810;
+}
+.lang-switch:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #2C1810;
 }
 
 .header-inner {
