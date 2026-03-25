@@ -1,8 +1,7 @@
 /**
  * translate.js — Google Translate widget initialiser
- * Language is chosen once on lang.html and stored in localStorage.
- * The googtrans cookie is set there; the widget just picks it up silently.
- * A MutationObserver actively removes the GT banner and resets body.top.
+ * Language chosen once in lang.html; cookie already set when this runs.
+ * MutationObserver + setProperty('important') permanently kills the GT banner.
  */
 window.googleTranslateElementInit = function () {
   var el = document.getElementById('google_translate_element');
@@ -16,33 +15,38 @@ window.googleTranslateElementInit = function () {
 
 function suppressGTBanner() {
   function clean() {
-    // Hide the banner iframe
+    // Hide every banner/toolbar frame GT might inject
     document.querySelectorAll(
-      '.goog-te-banner-frame, .goog-te-menu-frame, #goog-gt-tt'
-    ).forEach(function (el) {
-      el.style.cssText = 'display:none!important;height:0!important;';
+      '.goog-te-banner-frame, .goog-te-menu-frame, #goog-gt-tt, .skiptranslate > iframe'
+    ).forEach(function (node) {
+      node.style.setProperty('display',    'none', 'important');
+      node.style.setProperty('height',     '0',    'important');
+      node.style.setProperty('visibility', 'hidden', 'important');
     });
-    // Undo the body offset GT injects as inline style
-    if (document.body && document.body.style.top !== '0px') {
-      document.body.style.top = '0';
+
+    // GT sets body.style.top = '40px' (inline) to make room for the banner.
+    // setProperty with 'important' wins over any other inline value.
+    if (document.body) {
+      document.body.style.setProperty('top',        '0px', 'important');
+      document.body.style.setProperty('margin-top', '0px', 'important');
     }
   }
 
   clean();
 
-  // Watch body for GT injecting the iframe and setting style.top
-  var bodyObserver = new MutationObserver(clean);
-  bodyObserver.observe(document.body, {
+  // Watch <body> for GT injecting frames and mutating its own style attribute
+  new MutationObserver(clean).observe(document.body, {
     childList: true,
     attributes: true,
     attributeFilter: ['style', 'class']
   });
 
-  // Also watch <html> in case GT appends the frame there
-  var htmlObserver = new MutationObserver(clean);
-  htmlObserver.observe(document.documentElement, { childList: true });
+  // Watch <html> too — GT sometimes appends the frame there
+  new MutationObserver(clean).observe(document.documentElement, {
+    childList: true
+  });
 
-  // Belt-and-suspenders: clean again after GT finishes initialising
-  setTimeout(clean, 300);
-  setTimeout(clean, 1000);
+  // Belt-and-suspenders: clean after GT fully initialises
+  setTimeout(clean, 200);
+  setTimeout(clean, 800);
 }
