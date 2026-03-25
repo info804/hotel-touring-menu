@@ -13,8 +13,8 @@
   --ink:            #2C1810;
   --ink-mid:        #5C3D2E;
   --ink-light:      #8B6B55;
-  --terracotta:     #C4583A;
-  --terracotta-dk:  #A34428;
+  --terracotta:     #BF5050;
+  --terracotta-dk:  #933F40;
   --terracotta-lt:  #F2DDD7;
   --sage:           #7A9472;
   --sage-dk:        #5A7254;
@@ -53,7 +53,7 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 /* overflow-x: clip prevents horizontal scroll WITHOUT creating a scroll container,
    so position: sticky on .cat-tabs continues to work correctly */
-html { overflow-x: clip; }
+html { background-color: #F5F0E6; overflow-x: clip; }
 a { text-decoration: none; color: inherit; }
 
 body {
@@ -79,10 +79,18 @@ main {
 }
 
 /* ============================================================
+   GOOGLE TRANSLATE — hide banner & toolbar
+   ============================================================ */
+.goog-te-banner-frame,
+.goog-te-menu-frame { display: none !important; }
+#goog-gt-tt         { display: none !important; }
+body                { top: 0 !important; }
+
+/* ============================================================
    HEADER — main (index)
    ============================================================ */
 .site-header {
-  background: var(--terracotta);
+  background: linear-gradient(to bottom, #BF5050 0%, #A94848 30%, #933F40 55%, #7D3638 78%, #662D2F 100%);
   color: white;
   padding: 32px 20px 52px;
   text-align: center;
@@ -98,7 +106,7 @@ main {
   right: -1px;
   bottom: -14px;
   height: 20px;
-  background: var(--terracotta);
+  background: #662D2F;
   clip-path: polygon(
     0% 0%, 3% 100%, 6% 20%, 9% 85%, 12% 10%, 16% 90%, 20% 15%,
     24% 80%, 28% 5%, 32% 95%, 36% 20%, 40% 75%, 44% 0%,
@@ -848,7 +856,7 @@ main {
    FOOTER
    ============================================================ */
 .site-footer {
-  background: var(--ink);
+  background: #5D292B;
   color: rgba(255,255,255,0.8);
   padding: 28px 20px 16px;
   font-size: 0.82rem;

@@ -333,16 +333,6 @@ function initFab() {
   `;
   document.body.appendChild(fab);
 
-  // Page-exit animation on click
-  fab.addEventListener('click', function(e) {
-    e.preventDefault();
-    const href = this.getAttribute('href');
-    document.querySelector('main').style.transition = 'opacity 0.2s ease, transform 0.2s ease';
-    document.querySelector('main').style.opacity    = '0';
-    document.querySelector('main').style.transform  = 'translateY(10px)';
-    setTimeout(() => { window.location.href = href; }, 210);
-  });
-
   // Show/hide based on scroll position
   const header = document.querySelector('.site-header');
   const threshold = header ? header.offsetHeight + 20 : 80;
