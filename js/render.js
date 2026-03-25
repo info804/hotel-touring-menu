@@ -3,6 +3,10 @@
  * Features: sticky tabs, scroll-spy with tab centering, smooth animations
  */
 
+// Suppress scroll-spy while a tab click is animating
+let _clickScrolling = false;
+let _clickScrollTimer;
+
 /* -------------------------------------------------------
    renderMenu(data) — bar.html, ristorante.html, pizzeria.html
 ------------------------------------------------------- */
@@ -30,9 +34,18 @@ function renderMenu(data) {
         e.preventDefault();
         const target = document.getElementById('cat-' + cat.id);
         if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          _clickScrolling = true;
+          clearTimeout(_clickScrollTimer);
+          _clickScrollTimer = setTimeout(() => { _clickScrolling = false; }, 900);
+
+          const tabsH = tabsEl.offsetHeight;
+          const targetY = target.getBoundingClientRect().top + window.scrollY - tabsH;
+          window.scrollTo({ top: targetY, behavior: 'smooth' });
+
+          // Update active tab and center it immediately
+          tabsEl.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
         }
-        // Center this tab in the scrollable bar
         centerTab(tab);
       });
       tabsEl.appendChild(tab);
@@ -113,7 +126,18 @@ function renderWine(data) {
       tab.addEventListener('click', (e) => {
         e.preventDefault();
         const target = document.getElementById('cat-' + cat.id);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (target) {
+          _clickScrolling = true;
+          clearTimeout(_clickScrollTimer);
+          _clickScrollTimer = setTimeout(() => { _clickScrolling = false; }, 900);
+
+          const tabsH = tabsEl.offsetHeight;
+          const targetY = target.getBoundingClientRect().top + window.scrollY - tabsH;
+          window.scrollTo({ top: targetY, behavior: 'smooth' });
+
+          tabsEl.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+        }
         centerTab(tab);
       });
       tabsEl.appendChild(tab);
@@ -268,6 +292,9 @@ function initScrollSpy() {
   const TABS_H = tabsEl.offsetHeight + 16;
 
   const observer = new IntersectionObserver(entries => {
+    // Skip observer updates while a tab click is driving the scroll
+    if (_clickScrolling) return;
+
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       const id  = entry.target.id;

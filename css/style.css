@@ -53,7 +53,7 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 /* overflow-x: clip prevents horizontal scroll WITHOUT creating a scroll container,
    so position: sticky on .cat-tabs continues to work correctly */
-html { scroll-behavior: smooth; overflow-x: clip; }
+html { overflow-x: clip; }
 a { text-decoration: none; color: inherit; }
 
 body {
