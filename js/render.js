@@ -79,6 +79,9 @@ function renderMenu(data) {
 
   // Scroll-spy
   initScrollSpy();
+
+  // Floating back button
+  initFab();
 }
 
 /* -------------------------------------------------------
@@ -149,6 +152,7 @@ function renderWine(data) {
 
   animateSections();
   initScrollSpy();
+  initFab();
 }
 
 /* -------------------------------------------------------
@@ -283,6 +287,53 @@ function initScrollSpy() {
   });
 
   sections.forEach(s => observer.observe(s));
+}
+
+/* -------------------------------------------------------
+   initFab: floating "back to menu" button that appears
+   when the user has scrolled past the sticky header
+------------------------------------------------------- */
+function initFab() {
+  const fab = document.createElement('a');
+  fab.href      = 'index.html';
+  fab.className = 'fab-back';
+  fab.setAttribute('aria-label', 'Torna al Menù');
+  fab.innerHTML = `
+    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M11 4 L6 9 L11 14" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Menù
+  `;
+  document.body.appendChild(fab);
+
+  // Page-exit animation on click
+  fab.addEventListener('click', function(e) {
+    e.preventDefault();
+    const href = this.getAttribute('href');
+    document.querySelector('main').style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+    document.querySelector('main').style.opacity    = '0';
+    document.querySelector('main').style.transform  = 'translateY(10px)';
+    setTimeout(() => { window.location.href = href; }, 210);
+  });
+
+  // Show/hide based on scroll position
+  const header = document.querySelector('.site-header');
+  const threshold = header ? header.offsetHeight + 20 : 80;
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        if (window.scrollY > threshold) {
+          fab.classList.add('visible');
+        } else {
+          fab.classList.remove('visible');
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
 }
 
 /* -------------------------------------------------------

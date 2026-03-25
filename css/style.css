@@ -774,6 +774,61 @@ main {
 }
 
 /* ============================================================
+   FLOATING BACK-TO-MENU BUTTON
+   ============================================================ */
+.fab-back {
+  position: fixed;
+  bottom: 24px;
+  right: 18px;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--terracotta);
+  color: white;
+  border: 2px solid var(--ink);
+  border-radius: 24px 22px 24px 22px / 22px 24px 22px 24px;
+  box-shadow: 3px 3px 0 var(--ink);
+  padding: 10px 18px 10px 14px;
+  font-family: var(--font-hand);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+
+  /* Hidden by default */
+  opacity: 0;
+  transform: translateY(16px) scale(0.9);
+  pointer-events: none;
+  transition:
+    opacity 0.28s var(--ease),
+    transform 0.28s var(--ease),
+    box-shadow 0.15s var(--ease),
+    background 0.15s var(--ease);
+}
+
+.fab-back.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.fab-back:hover {
+  background: var(--terracotta-dk);
+  box-shadow: 5px 5px 0 var(--ink);
+  transform: translate(-1px, -1px) scale(1);
+}
+
+.fab-back:active {
+  transform: translate(2px, 2px) scale(0.97);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.fab-back svg {
+  flex-shrink: 0;
+}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 .site-footer {
