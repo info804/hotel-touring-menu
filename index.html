@@ -37,27 +37,38 @@
               <path d="M20 3 C20 3 18 5 18 9 C18 11 19 12 20 13" stroke="#2C1810" stroke-width="1.8"/>
             </svg>
           </div>
-          <h2 class="card-title">Ristorante</h2>
-          <p class="card-desc">Specialità della cucina Valtellinese e piatti di montagna</p>
-          <span class="card-btn">Sfoglia il menù</span>
+          <div class="card-content">
+            <h2 class="card-title">Ristorante</h2>
+            <p class="card-desc">Specialità della cucina Valtellinese e piatti di montagna</p>
+            <span class="card-btn">Sfoglia il menù</span>
+          </div>
         </a>
 
         <!-- PIZZERIA -->
         <a href="pizzeria.html" class="menu-card">
           <div class="card-icon">
-            <!-- Hand-drawn pizza slice -->
-            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 4 L4 22 L24 22 Z" stroke="#2C1810" stroke-width="1.8"/>
-              <path d="M4 22 Q14 25 24 22" stroke="#2C1810" stroke-width="1.8"/>
-              <circle cx="14" cy="15" r="1.5" fill="#C4583A"/>
-              <circle cx="10" cy="18" r="1" fill="#C4583A"/>
-              <circle cx="18" cy="18" r="1" fill="#C4583A"/>
-              <path d="M10 10 Q14 8 18 10" stroke="#2C1810" stroke-width="1.2"/>
+            <svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+              <!-- cheese base fill -->
+              <path d="M14 4 L3 23 L25 23 Z" fill="#F5D06A" fill-opacity="0.55" stroke="none"/>
+              <!-- sauce layer -->
+              <path d="M14 7 L5.5 22 L22.5 22 Z" fill="#E8896A" fill-opacity="0.45" stroke="none"/>
+              <!-- crust edge -->
+              <path d="M3 23 Q8.5 27 14 27 Q19.5 27 25 23" stroke="#C4583A" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+              <!-- slice outline on top -->
+              <path d="M14 4 L3 23 L25 23 Z" stroke="#2C1810" stroke-width="1.8" fill="none"/>
+              <!-- toppings -->
+              <circle cx="14" cy="14" r="1.8" fill="#C4583A"/>
+              <circle cx="10.5" cy="18.5" r="1.4" fill="#C4583A"/>
+              <circle cx="17.5" cy="18.5" r="1.4" fill="#C4583A"/>
+              <circle cx="14" cy="20.5" r="1.1" fill="#7A9472"/>
+              <circle cx="11" cy="13" r="0.9" fill="#7A9472"/>
             </svg>
           </div>
-          <h2 class="card-title">Pizzeria</h2>
-          <p class="card-desc">Le nostre pizze artigianali — impasto e ingredienti selezionati</p>
-          <span class="card-btn">Sfoglia il menù</span>
+          <div class="card-content">
+            <h2 class="card-title">Pizzeria</h2>
+            <p class="card-desc">Le nostre pizze artigianali — impasto e ingredienti selezionati</p>
+            <span class="card-btn">Sfoglia il menù</span>
+          </div>
         </a>
 
         <!-- BAR -->
@@ -72,24 +83,36 @@
               <line x1="5" y1="11" x2="23" y2="11" stroke="#2C1810" stroke-width="1.8"/>
             </svg>
           </div>
-          <h2 class="card-title">Bar</h2>
-          <p class="card-desc">Caffetteria, bibite e birre, dolci, panini, aperitivi e alcolici</p>
-          <span class="card-btn">Sfoglia il menù</span>
+          <div class="card-content">
+            <h2 class="card-title">Bar</h2>
+            <p class="card-desc">Caffetteria, bibite e birre, dolci, panini, aperitivi e alcolici</p>
+            <span class="card-btn">Sfoglia il menù</span>
+          </div>
         </a>
 
         <!-- CARTA DEI VINI -->
         <a href="vini.html" class="menu-card">
           <div class="card-icon">
-            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M8 4 C8 4 6 10 8 14 C9.5 17 12 18 14 18 C16 18 18.5 17 20 14 C22 10 20 4 20 4 Z" stroke="#2C1810" stroke-width="1.8"/>
-              <path d="M8 10 C8 10 10 13 14 13 C18 13 20 10 20 10" stroke="#2C1810" stroke-width="1.3"/>
+            <svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+              <!-- wine fill -->
+              <path d="M8.5 4 C8.5 4 6.2 10 8.2 14 C9.6 16.8 12 18 14 18 C16 18 18.4 16.8 19.8 14 C21.8 10 19.5 4 19.5 4 Z" fill="#A34428" fill-opacity="0.65" stroke="none"/>
+              <!-- wine level (top of wine) -->
+              <path d="M8.8 10.5 C9.5 13.5 11.5 14.5 14 14.5 C16.5 14.5 18.5 13.5 19.2 10.5 Z" fill="#C4583A" fill-opacity="0.5" stroke="none"/>
+              <!-- glass outline -->
+              <path d="M8 4 C8 4 6 10 8 14 C9.5 17 12 18 14 18 C16 18 18.5 17 20 14 C22 10 20 4 20 4 Z" stroke="#2C1810" stroke-width="1.8" fill="none"/>
+              <!-- wine line -->
+              <path d="M8.5 10.5 C9.5 13.5 11.5 14.5 14 14.5 C16.5 14.5 18.5 13.5 19.5 10.5" stroke="#2C1810" stroke-width="1" stroke-dasharray="2 1.5" fill="none"/>
+              <!-- stem -->
               <line x1="14" y1="18" x2="14" y2="23" stroke="#2C1810" stroke-width="1.8"/>
+              <!-- base -->
               <path d="M10 23 L18 23" stroke="#2C1810" stroke-width="1.8"/>
             </svg>
           </div>
-          <h2 class="card-title">Carta dei Vini</h2>
-          <p class="card-desc"><em>I veri intenditori non bevono vino… degustano segreti</em></p>
-          <span class="card-btn gold">Sfoglia il menù</span>
+          <div class="card-content">
+            <h2 class="card-title">Carta dei Vini</h2>
+            <p class="card-desc"><em>I veri intenditori non bevono vino… degustano segreti</em></p>
+            <span class="card-btn gold">Sfoglia il menù</span>
+          </div>
         </a>
 
       </div>
@@ -106,5 +129,27 @@
     </div>
   </footer>
 
+  <script>
+    // Card press + page-exit animation
+    document.querySelectorAll('.menu-card').forEach(card => {
+      card.addEventListener('click', function(e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        // Pop the pressed card
+        this.style.transition = 'transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease';
+        this.style.transform  = 'translate(3px, 3px) scale(0.96)';
+        this.style.boxShadow  = '1px 1px 0 #2C1810';
+        this.style.opacity    = '0.85';
+        // Fade out main, then navigate
+        setTimeout(() => {
+          const main = document.querySelector('main');
+          main.style.transition = 'opacity 0.18s ease, transform 0.18s ease';
+          main.style.opacity    = '0';
+          main.style.transform  = 'translateY(-10px)';
+        }, 100);
+        setTimeout(() => { window.location.href = href; }, 280);
+      });
+    });
+  </script>
 </body>
 </html>

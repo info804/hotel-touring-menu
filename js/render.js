@@ -302,16 +302,19 @@ function centerTab(tab) {
 function animateSections() {
   const sections = document.querySelectorAll('.cat-section');
   sections.forEach((section, i) => {
-    section.style.opacity   = '0';
-    section.style.transform = 'translateY(16px)';
-    section.style.transition = `opacity 0.35s ease ${i * 0.04}s, transform 0.35s ease ${i * 0.04}s`;
+    section.style.opacity    = '0';
+    section.style.transform  = 'translateY(18px)';
+    section.style.transition = 'none';
   });
 
-  // Trigger on next frame so CSS transition fires
+  // Double RAF: first frame sets initial state, second triggers transition
   requestAnimationFrame(() => {
-    sections.forEach(section => {
-      section.style.opacity   = '1';
-      section.style.transform = 'translateY(0)';
+    requestAnimationFrame(() => {
+      sections.forEach((section, i) => {
+        section.style.transition = `opacity 0.4s ease ${i * 0.05}s, transform 0.4s ease ${i * 0.05}s`;
+        section.style.opacity    = '1';
+        section.style.transform  = 'translateY(0)';
+      });
     });
   });
 }
