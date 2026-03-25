@@ -981,26 +981,48 @@ body { top: 0 !important; margin-top: 0 !important; }
 body.theme-ristorante {
   --terracotta:    #A94848;
   --terracotta-dk: #933F40;
+  --terracotta-lt: #F3DCDC;
 }
 body.theme-ristorante .site-header { background: #A94848; }
 
 body.theme-pizzeria {
   --terracotta:    #933F40;
   --terracotta-dk: #7D3638;
+  --terracotta-lt: #EED9D9;
 }
 body.theme-pizzeria .site-header { background: #933F40; }
 
 body.theme-bar {
   --terracotta:    #7D3638;
   --terracotta-dk: #662D2F;
+  --terracotta-lt: #E8D3D3;
 }
 body.theme-bar .site-header { background: #7D3638; }
 
 body.theme-vini {
   --terracotta:    #662D2F;
   --terracotta-dk: #5D292B;
+  --terracotta-lt: #E2CCCC;
 }
 body.theme-vini .site-header { background: #662D2F; }
+
+/* ============================================================
+   HOME CARDS — each card uses its section's theme color
+   for the title and button so index.html matches the pages
+   ============================================================ */
+a[href="ristorante.html"] { --terracotta: #A94848; --terracotta-dk: #933F40; }
+a[href="pizzeria.html"]   { --terracotta: #933F40; --terracotta-dk: #7D3638; }
+a[href="bar.html"]        { --terracotta: #7D3638; --terracotta-dk: #662D2F; }
+a[href="vini.html"]       { --terracotta: #662D2F; --terracotta-dk: #5D292B; }
+
+/* Vini card has class="card-btn gold" — override gold with its theme color */
+a[href="vini.html"] .card-btn {
+  background:  var(--terracotta)    !important;
+  box-shadow:  2px 2px 0 var(--terracotta-dk) !important;
+}
+a[href="vini.html"]:hover .card-btn {
+  box-shadow:  4px 4px 0 var(--terracotta-dk) !important;
+}
 
 /* ============================================================
    RESPONSIVE
