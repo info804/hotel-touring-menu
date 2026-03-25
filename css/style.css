@@ -290,6 +290,13 @@ main {
   height: 30px;
 }
 
+/* Wine bottle is taller than square — let it breathe vertically */
+.menu-card:last-child .card-icon {
+  width: 48px;
+  height: 62px;
+  border-radius: 26px 22px 26px 24px / 22px 26px 22px 26px;
+}
+
 .menu-card:hover .card-icon {
   transform: rotate(-4deg) scale(1.05);
 }
