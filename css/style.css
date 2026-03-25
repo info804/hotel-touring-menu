@@ -79,12 +79,14 @@ main {
 }
 
 /* ============================================================
-   GOOGLE TRANSLATE — hide banner & toolbar
+   GOOGLE TRANSLATE — nuke banner & toolbar completely
    ============================================================ */
 .goog-te-banner-frame,
-.goog-te-menu-frame { display: none !important; }
-#goog-gt-tt         { display: none !important; }
-body                { top: 0 !important; }
+.goog-te-menu-frame,
+#goog-gt-tt,
+.skiptranslate > iframe { display: none !important; height: 0 !important; }
+/* GT forces body { top: Npx } as inline style — override it */
+body[style*="top"]  { top: 0 !important; }
 
 /* ============================================================
    HEADER — main (index)
