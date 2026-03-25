@@ -19,6 +19,8 @@
 
   <!-- ===== HEADER ===== -->
   <header class="site-header">
+    <button class="lang-switch" id="lang-switch"
+            onclick="sessionStorage.setItem('langReturn',location.href);location.href='lang.html';">IT</button>
     <div class="header-inner">
       <div class="logo-text">Hotel Touring Livigno</div>
       <h1 class="header-title">Ristorante Hotel Touring Livigno</h1>
@@ -226,6 +228,13 @@
         setTimeout(() => { window.location.href = href; }, 280);
       });
     });
+  </script>
+  <script>
+    (function () {
+      var lang  = localStorage.getItem('menuLang') || 'it';
+      var label = lang.split('-')[0].toUpperCase().substring(0, 2);
+      document.getElementById('lang-switch').textContent = label;
+    })();
   </script>
 </body>
 </html>

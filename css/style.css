@@ -127,6 +127,29 @@ body { top: 0 !important; margin-top: 0 !important; }
   z-index: 1;
 }
 
+/* Language-switch pill — top-right of main header */
+.lang-switch {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  z-index: 10;
+  background: rgba(255,255,255,0.18);
+  border: 1.5px solid rgba(255,255,255,0.55);
+  border-radius: 8px 6px 8px 7px / 7px 8px 6px 8px;
+  color: white;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 4px 9px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background var(--t-fast) var(--ease);
+}
+.lang-switch:hover {
+  background: rgba(255,255,255,0.32);
+}
+
 .header-inner {
   max-width: 860px;
   margin: 0 auto;
