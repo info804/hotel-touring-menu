@@ -927,6 +927,36 @@ body                { top: 0 !important; }
 .footer-links a:hover { color: rgba(255,255,255,0.9); }
 
 /* ============================================================
+   PER-PAGE THEMES
+   Overrides --terracotta (tabs, prices, buttons, FAB)
+   and compact header background for each sub-page.
+   Darker variant = next color in the sequence.
+   ============================================================ */
+body.theme-ristorante {
+  --terracotta:    #A94848;
+  --terracotta-dk: #933F40;
+}
+body.theme-ristorante .site-header { background: #A94848; }
+
+body.theme-pizzeria {
+  --terracotta:    #933F40;
+  --terracotta-dk: #7D3638;
+}
+body.theme-pizzeria .site-header { background: #933F40; }
+
+body.theme-bar {
+  --terracotta:    #7D3638;
+  --terracotta-dk: #662D2F;
+}
+body.theme-bar .site-header { background: #7D3638; }
+
+body.theme-vini {
+  --terracotta:    #662D2F;
+  --terracotta-dk: #5D292B;
+}
+body.theme-vini .site-header { background: #662D2F; }
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 420px) {
