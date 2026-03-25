@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menù Speciali — Hotel Touring Livigno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header compact">
+    <a href="index.html" class="back-btn">&#8592; Menù</a>
+    <span class="compact-title">Hotel Touring Livigno</span>
+  </header>
+
+  <main>
+    <div class="special-menu-wrapper">
+      <div class="page-header" style="margin-bottom: 20px;">
+        <h1 class="page-title" id="page-title">Menù Speciali</h1>
+      </div>
+      <div class="special-tabs" id="special-tabs"></div>
+      <div id="special-container"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+  </footer>
+
+  <script src="data/speciali_data.js"></script>
+  <script src="js/render.js"></script>
+  <script>renderSpeciali(SPECIALI_DATA);</script>
+</body>
+</html>

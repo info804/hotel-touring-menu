@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizzeria — Hotel Touring Livigno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header compact">
+    <a href="index.html" class="back-btn">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11 4 L6 9 L11 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Menù
+    </a>
+    <span class="compact-title">Hotel Touring Livigno</span>
+  </header>
+
+  <main>
+    <div class="menu-page">
+      <div class="page-header">
+        <h1 class="page-title" id="page-title">Pizzeria</h1>
+        <p class="page-subtitle" id="page-subtitle"></p>
+      </div>
+      <div class="cat-tabs" id="cat-tabs"></div>
+      <div id="menu-container"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-contact">
+      <p class="footer-contact-label">Contattaci</p>
+      <p class="footer-hotel-name">Hotel Touring Livigno — Touring srl</p>
+      <p class="footer-address">Via Plan, 117 — 23030 Livigno (SO), Italia</p>
+      <a href="tel:+390342996131" class="footer-phone">Tel. +39 0342/996131</a>
+    </div>
+  </footer>
+
+  <script src="data/pizzeria_data.js"></script>
+  <script src="js/render.js"></script>
+  <script>renderMenu(PIZZERIA_DATA);</script>
+</body>
+</html>
