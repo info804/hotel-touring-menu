@@ -732,6 +732,10 @@ body { top: 0 !important; margin-top: 0 !important; }
   flex: 1;
 }
 
+.special-menu-wrapper .page-header {
+  margin-bottom: 20px;
+}
+
 .special-tabs {
   display: flex;
   gap: 12px;
@@ -758,8 +762,13 @@ body { top: 0 !important; margin-top: 0 !important; }
   text-align: center;
 }
 
-.special-tab-btn.active,
 .special-tab-btn:hover {
+  background: var(--terracotta-lt);
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.special-tab-btn.active {
   background: var(--terracotta);
   border-color: var(--terracotta-dk);
   color: white;
@@ -1005,6 +1014,8 @@ body.theme-vini {
   --terracotta-lt: #E2CCCC;
 }
 body.theme-vini .site-header { background: #662D2F; }
+
+body.theme-speciali .site-header { background: #BF5050; }
 
 /* ============================================================
    HOME CARDS — each card uses its section's theme color

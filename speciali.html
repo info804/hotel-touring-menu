@@ -13,19 +13,24 @@
   <script src="js/translate.js"></script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
 </head>
-<body>
+<body class="theme-speciali">
   <div id="google_translate_element" style="position:absolute;top:-9999px;left:-9999px;"></div>
 
-
   <header class="site-header compact">
-    <a href="index.html" class="back-btn">&#8592; Menù</a>
+    <a href="index.html" class="back-btn">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11 4 L6 9 L11 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Menù
+    </a>
     <span class="compact-title">Hotel Touring Livigno</span>
   </header>
 
   <main>
     <div class="special-menu-wrapper">
-      <div class="page-header" style="margin-bottom: 20px;">
+      <div class="page-header">
         <h1 class="page-title" id="page-title">Menù Speciali</h1>
+        <p class="page-subtitle" id="page-subtitle"></p>
       </div>
       <div class="special-tabs" id="special-tabs"></div>
       <div id="special-container"></div>
@@ -33,6 +38,12 @@
   </main>
 
   <footer class="site-footer">
+    <div class="footer-contact">
+      <p class="footer-contact-label">Contattaci</p>
+      <p class="footer-hotel-name">Hotel Touring Livigno — Touring srl</p>
+      <p class="footer-address">Via Plan, 117 — 23030 Livigno (SO), Italia</p>
+      <a href="tel:+390342996131" class="footer-phone">Tel. +39 0342/996131</a>
+    </div>
   </footer>
 
   <script src="data/speciali_data.js"></script>
