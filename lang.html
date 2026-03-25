@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Touring Livigno — Lingua / Language</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      background: #F5F0E6;
+      font-family: 'Lato', 'Helvetica Neue', sans-serif;
+      color: #2C1810;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ---- Header ---- */
+    .lang-header {
+      background: linear-gradient(to bottom, #BF5050 0%, #A94848 30%, #933F40 55%, #7D3638 78%, #662D2F 100%);
+      color: white;
+      text-align: center;
+      padding: 36px 20px 56px;
+      position: relative;
+      overflow: visible;
+    }
+
+    .lang-header::after {
+      content: '';
+      position: absolute;
+      left: -1px; right: -1px; bottom: -14px;
+      height: 20px;
+      background: #662D2F;
+      clip-path: polygon(
+        0% 0%, 3% 100%, 6% 20%, 9% 85%, 12% 10%, 16% 90%, 20% 15%,
+        24% 80%, 28% 5%, 32% 95%, 36% 20%, 40% 75%, 44% 0%,
+        48% 90%, 52% 10%, 56% 80%, 60% 5%, 64% 95%, 68% 15%,
+        72% 85%, 76% 10%, 80% 90%, 84% 20%, 88% 80%, 92% 5%,
+        96% 95%, 100% 15%, 100% 0%
+      );
+      z-index: 1;
+    }
+
+    .lang-logo {
+      display: inline-block;
+      border: 2px solid rgba(255,255,255,0.65);
+      border-radius: 6px 4px 6px 5px / 5px 6px 4px 6px;
+      padding: 6px 16px;
+      letter-spacing: 0.18em;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: white;
+      margin-bottom: 14px;
+    }
+
+    .lang-title {
+      font-family: 'Caveat', cursive;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 6px;
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.12);
+    }
+
+    .lang-subtitle {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.82);
+      font-style: italic;
+    }
+
+    /* ---- Body / grid ---- */
+    .lang-body {
+      flex: 1;
+      padding: 44px 20px 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .lang-prompt {
+      font-family: 'Caveat', cursive;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #5C3D2E;
+      margin-bottom: 22px;
+      text-align: center;
+    }
+
+    .lang-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      background: #FDFAF4;
+      border: 2px solid #2C1810;
+      border-radius: 14px 11px 13px 12px / 12px 14px 11px 13px;
+      box-shadow: 3px 3px 0 #2C1810;
+      padding: 13px 15px;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .lang-btn:hover {
+      background: #FFF6ED;
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 #2C1810;
+    }
+
+    .lang-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 #2C1810;
+    }
+
+    .lang-btn.it {
+      border-color: #BF5050;
+      box-shadow: 3px 3px 0 #933F40;
+    }
+
+    .lang-btn.it:hover {
+      background: #F2DDD7;
+      box-shadow: 4px 4px 0 #933F40;
+    }
+
+    .lang-flag {
+      font-size: 1.75rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .lang-name {
+      font-family: 'Caveat', cursive;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #2C1810;
+      line-height: 1.1;
+    }
+
+    .lang-native {
+      font-size: 0.7rem;
+      color: #8B6B55;
+      margin-top: 1px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .lang-body {
+      animation: fadeUp 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s both;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="lang-header">
+    <div class="lang-logo">Hotel Touring Livigno</div>
+    <h1 class="lang-title">Benvenuti — Welcome</h1>
+    <p class="lang-subtitle">Menù digitale del Ristorante</p>
+  </header>
+
+  <main class="lang-body">
+    <p class="lang-prompt">Scegli la tua lingua / Choose your language</p>
+
+    <div class="lang-grid">
+
+      <button class="lang-btn it" onclick="selectLang('it')">
+        <span class="lang-flag">🇮🇹</span>
+        <div>
+          <div class="lang-name">Italiano</div>
+          <div class="lang-native">Italian</div>
+        </div>
+      </button>
+
+      <button class="lang-btn" onclick="selectLang('en')">
+        <span class="lang-flag">🇬🇧</span>
+        <div>
+          <div class="lang-name">English</div>
+          <div class="lang-native">Inglese</div>
+        </div>
+      </button>
+
+      <button class="lang-btn" onclick="selectLang('de')">
+        <span class="lang-flag">🇩🇪</span>
+        <div>
+          <div class="lang-name">Deutsch</div>
+          <div class="lang-native">Tedesco</div>
+        </div>
+      </button>
+
+      <button class="lang-btn" onclick="selectLang('fr')">
+        <span class="lang-flag">🇫🇷</span>
+        <div>
+          <div class="lang-name">Français</div>
+          <div class="lang-native">Francese</div>
+        </div>
+      </button>
+
+      <button class="lang-btn" onclick="selectLang('ru')">
+        <span class="lang-flag">🇷🇺</span>
+        <div>
+          <div class="lang-name">Русский</div>
+          <div class="lang-native">Russo</div>
+        </div>
+      </button>
+
+      <button class="lang-btn" onclick="selectLang('cs')">
+        <span class="lang-flag">🇨🇿</span>
+        <div>
+          <div class="lang-name">Čeština</div>
+          <div class="lang-native">Ceco</div>
+        </div>
+      </button>
+
+      <button class="lang-btn" onclick="selectLang('pl')">
+        <span class="lang-flag">🇵🇱</span>
+        <div>
+          <div class="lang-name">Polski</div>
+          <div class="lang-native">Polacco</div>
+        </div>
+      </button>
+
+      <button class="lang-btn" onclick="selectLang('nl')">
+        <span class="lang-flag">🇳🇱</span>
+        <div>
+          <div class="lang-name">Nederlands</div>
+          <div class="lang-native">Olandese</div>
+        </div>
+      </button>
+
+    </div>
+  </main>
+
+  <script>
+    function selectLang(code) {
+      localStorage.setItem('menuLang', code);
+
+      var hostname = window.location.hostname;
+
+      if (code === 'it') {
+        // Clear any translation cookie
+        document.cookie = 'googtrans=;path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        if (hostname && hostname !== 'localhost') {
+          document.cookie = 'googtrans=;path=/;domain=' + hostname + ';expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        }
+      } else {
+        var val = '/it/' + code;
+        document.cookie = 'googtrans=' + val + ';path=/';
+        if (hostname && hostname !== 'localhost') {
+          document.cookie = 'googtrans=' + val + ';path=/;domain=' + hostname;
+        }
+      }
+
+      var returnUrl = sessionStorage.getItem('langReturn') || 'index.html';
+      sessionStorage.removeItem('langReturn');
+      window.location.replace(returnUrl);
+    }
+  </script>
+
+</body>
+</html>
