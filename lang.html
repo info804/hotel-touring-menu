@@ -6,73 +6,81 @@
   <title>Hotel Touring Livigno — Lingua / Language</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Patrick+Hand&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+    :root {
+      --bg:          #F5EEDF;
+      --header-bg:   #EBDCC2;
+      --card-bg:     #FBF7EC;
+      --ink:         #3B2E24;
+      --ink-soft:    #6E5C4B;
+      --accent:      #B05730;
+      --accent-deep: #8E4324;
+      --accent-tint: #E9D3C2;
+      --line:        #D9C7A6;
+    }
+
     html, body {
-      background: #F5F0E6;
-      font-family: 'Lato', 'Helvetica Neue', sans-serif;
-      color: #2C1810;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      background-size: 300px 300px;
+      background:  var(--bg);
+      font-family: 'Patrick Hand', 'Helvetica Neue', sans-serif;
+      color:       var(--ink);
     }
 
     /* Header */
     .lang-header {
-      background: linear-gradient(to bottom, #BF5050 0%, #A94848 30%, #933F40 55%, #7D3638 78%, #662D2F 100%);
-      color: white;
-      text-align: center;
-      padding: 32px 20px 52px;
-      position: relative;
+      background:  var(--header-bg);
+      text-align:  center;
+      padding:     32px 20px 72px;
+      position:    relative;
+      border-bottom: 1.5px solid var(--line);
     }
-    .lang-header::after {
-      content: '';
+
+    .wave-divider {
       position: absolute;
-      left: -1px; right: -1px; bottom: -14px;
-      height: 20px;
-      background: #662D2F;
-      clip-path: polygon(
-        0% 0%, 3% 100%, 6% 20%, 9% 85%, 12% 10%, 16% 90%, 20% 15%,
-        24% 80%, 28% 5%, 32% 95%, 36% 20%, 40% 75%, 44% 0%,
-        48% 90%, 52% 10%, 56% 80%, 60% 5%, 64% 95%, 68% 15%,
-        72% 85%, 76% 10%, 80% 90%, 84% 20%, 88% 80%, 92% 5%,
-        96% 95%, 100% 15%, 100% 0%
-      );
+      left: 0; right: 0; bottom: -1px;
+      width: 100%; height: 46px;
+      display: block;
+      color: var(--bg);
     }
-    .lang-logo {
-      display: inline-block;
-      border: 2px solid rgba(255,255,255,0.65);
-      border-radius: 6px 4px 6px 5px / 5px 6px 4px 6px;
-      padding: 6px 16px;
-      letter-spacing: 0.18em;
-      font-size: 0.7rem;
-      font-weight: 700;
+
+    .lang-badge {
+      display:        inline-block;
+      font-size:      0.7rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: white;
-      margin-bottom: 12px;
+      color:          var(--accent);
+      border:         1.5px solid var(--accent);
+      border-radius:  4px;
+      padding:        6px 16px 4px;
+      margin-bottom:  16px;
+      background:     rgba(255,255,255,0.3);
     }
+
     .lang-title {
       font-family: 'Caveat', cursive;
-      font-size: 2rem;
+      font-size:   2.6rem;
       font-weight: 700;
-      color: white;
-      text-shadow: 2px 2px 0 rgba(0,0,0,0.12);
-      margin-bottom: 4px;
+      color:       var(--ink);
+      margin-bottom: 8px;
+      line-height: 1.1;
     }
+
     .lang-subtitle {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.82);
-      font-style: italic;
+      font-size:   1rem;
+      color:       var(--ink-soft);
+      letter-spacing: 0.01em;
     }
 
     /* Body */
     .lang-body {
-      padding: 40px 18px 40px;
+      padding:   52px 18px 48px;
       max-width: 640px;
-      margin: 0 auto;
+      margin:    0 auto;
       animation: fadeUp 0.35s cubic-bezier(0.25,0.46,0.45,0.94) 0.08s both;
     }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -80,93 +88,87 @@
 
     /* Search */
     .lang-search-wrap {
-      position: relative;
+      position:      relative;
       margin-bottom: 22px;
     }
     .lang-search {
-      width: 100%;
-      padding: 11px 16px 11px 40px;
-      background: #FDFAF4;
-      border: 2px solid #2C1810;
-      border-radius: 20px 18px 20px 19px / 19px 20px 18px 20px;
-      box-shadow: 3px 3px 0 #2C1810;
-      font-family: 'Caveat', cursive;
-      font-size: 1.05rem;
-      color: #2C1810;
-      outline: none;
-      transition: box-shadow 0.12s ease;
+      width:       100%;
+      padding:     11px 16px 11px 40px;
+      background:  var(--card-bg);
+      border:      1.5px solid var(--line);
+      border-radius: 999px;
+      font-family: 'Patrick Hand', sans-serif;
+      font-size:   0.95rem;
+      color:       var(--ink);
+      outline:     none;
+      transition:  border-color 0.12s ease, box-shadow 0.12s ease;
     }
     .lang-search:focus {
-      box-shadow: 4px 4px 0 #2C1810;
+      border-color: var(--accent);
+      box-shadow:   0 0 0 3px rgba(176,87,48,0.12);
     }
-    .lang-search::placeholder { color: #8B6B55; }
+    .lang-search::placeholder { color: var(--ink-soft); }
     .lang-search-icon {
-      position: absolute;
-      left: 13px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #8B6B55;
+      position:      absolute;
+      left:          13px;
+      top:           50%;
+      transform:     translateY(-50%);
+      color:         var(--ink-soft);
       pointer-events: none;
-      font-size: 1rem;
+      font-size:     1rem;
     }
 
     /* Pill grid */
     .lang-grid {
-      display: flex;
+      display:   flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap:       8px;
     }
 
-    /* Pill button — matches cat-tab / fab-back aesthetic */
     .lang-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #FDFAF4;
-      border: 2px solid #2C1810;
-      border-radius: 20px 18px 20px 19px / 19px 20px 18px 20px;
-      box-shadow: 2px 2px 0 #2C1810;
-      color: #5C3D2E;
-      padding: 6px 14px;
-      font-family: 'Caveat', cursive;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+      display:        inline-flex;
+      align-items:    center;
+      gap:            6px;
+      background:     var(--card-bg);
+      border:         1.5px solid var(--line);
+      border-radius:  999px;
+      color:          var(--ink-soft);
+      padding:        6px 16px;
+      font-family:    'Patrick Hand', sans-serif;
+      font-size:      0.9rem;
+      font-weight:    400;
+      cursor:         pointer;
+      white-space:    nowrap;
+      transition:     background 0.1s ease, border-color 0.1s ease, color 0.1s ease, transform 0.1s ease;
       -webkit-tap-highlight-color: transparent;
     }
     .lang-btn:hover {
-      background: #FFF6ED;
-      transform: translate(-1px, -1px);
-      box-shadow: 3px 3px 0 #2C1810;
+      background:   var(--accent-tint);
+      border-color: var(--accent);
+      color:        var(--accent);
+      transform:    translateY(-1px);
     }
-    .lang-btn:active {
-      transform: translate(1px, 1px);
-      box-shadow: 1px 1px 0 #2C1810;
-    }
+    .lang-btn:active { transform: translateY(0); }
 
     /* Italian — accent highlight */
     .lang-btn.lang-it {
-      background: #BF5050;
-      border-color: #933F40;
-      box-shadow: 2px 2px 0 #933F40;
-      color: white;
+      background:   var(--accent);
+      border-color: var(--accent-deep);
+      color:        var(--card-bg);
+      font-weight:  700;
     }
     .lang-btn.lang-it:hover {
-      background: #A94848;
-      box-shadow: 3px 3px 0 #933F40;
+      background: var(--accent-deep);
     }
 
-    /* Hidden by search filter */
     .lang-btn.hidden { display: none; }
 
     .lang-empty {
-      display: none;
-      color: #8B6B55;
+      display:    none;
+      color:      var(--ink-soft);
       font-style: italic;
-      font-size: 0.9rem;
-      padding: 8px 0;
+      font-size:  0.9rem;
+      padding:    8px 0;
     }
     .lang-empty.visible { display: block; }
   </style>
@@ -174,9 +176,12 @@
 <body>
 
   <header class="lang-header">
-    <div class="lang-logo">Hotel Touring Livigno</div>
+    <div class="lang-badge">Hotel Touring Livigno</div>
     <h1 class="lang-title">Benvenuti — Welcome</h1>
     <p class="lang-subtitle">Scegli la lingua / Choose your language</p>
+    <svg class="wave-divider" viewBox="0 0 1200 46" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,30 C100,8 200,8 300,26 C400,44 500,44 600,26 C700,8 800,8 900,26 C1000,44 1100,44 1200,26 L1200,46 L0,46 Z" fill="currentColor"/>
+    </svg>
   </header>
 
   <main class="lang-body">
@@ -319,7 +324,7 @@
       { code: 'uk',       name: 'Ukrainian — Українська' },
       { code: 'ur',       name: 'Urdu — اردو' },
       { code: 'ug',       name: 'Uyghur — ئۇيغۇرچە' },
-      { code: 'uz',       name: 'Uzbek — O\'zbek' },
+      { code: 'uz',       name: "Uzbek — O'zbek" },
       { code: 'vi',       name: 'Vietnamese — Tiếng Việt' },
       { code: 'cy',       name: 'Welsh — Cymraeg' },
       { code: 'xh',       name: 'Xhosa' },
@@ -332,7 +337,6 @@
     var empty = document.getElementById('langEmpty');
     var input = document.getElementById('langSearch');
 
-    // Render all buttons
     LANGS.forEach(function (lang) {
       var btn = document.createElement('button');
       btn.className = 'lang-btn' + (lang.code === 'it' ? ' lang-it' : '');
@@ -342,7 +346,6 @@
       grid.appendChild(btn);
     });
 
-    // Live search filter
     input.addEventListener('input', function () {
       var q = this.value.trim().toLowerCase();
       var visible = 0;
@@ -356,7 +359,6 @@
 
     function selectLang(code) {
       localStorage.setItem('menuLang', code);
-
       var hostname = window.location.hostname;
       if (code === 'it') {
         document.cookie = 'googtrans=;path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT';
@@ -370,7 +372,6 @@
           document.cookie = 'googtrans=' + val + ';path=/;domain=' + hostname;
         }
       }
-
       var returnUrl = sessionStorage.getItem('langReturn') || 'index.html';
       sessionStorage.removeItem('langReturn');
       window.location.replace(returnUrl);
