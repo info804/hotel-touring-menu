@@ -13,6 +13,29 @@ const RISTORANTE_DATA = {
   categories: [
 
     // --------------------------------------------------------
+    // MENÙ DEGUSTAZIONE
+    // --------------------------------------------------------
+    {
+      id: "degustazione",
+      name: "MENÙ DEGUSTAZIONE",
+      note: "Prezzo fisso a persona",
+      items: [
+        {
+          name: "Degustazione Valtellinese",
+          desc: "Bresaola di Livigno con lamelle di Casera servita con sciatt · Pizzoccheri fatti in casa alla Valtellinese · Tzigoiner con verdure grigliate e patate al forno · Sorbetto al Braulio",
+          allergens: "1 3 5 7 10",
+          price: "49.00"
+        },
+        {
+          name: "Menù Selvaggina",
+          desc: "Slinziga di cervo con burro al ginepro e funghi porcini sott'olio · Rustici fatti a mano al ragù di capriolo · Salmì di cervo con polenta taragna · Gelato alla Taneda",
+          allergens: "1 3 5 7 9 12",
+          price: "55.00"
+        }
+      ]
+    },
+
+    // --------------------------------------------------------
     // ANTIPASTI
     // --------------------------------------------------------
     {
