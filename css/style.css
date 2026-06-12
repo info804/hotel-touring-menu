@@ -293,8 +293,8 @@ main          { animation: pageIn  0.36s var(--ease) 0.06s both; }
   width:           68px;
   height:          68px;
   border-radius:   50%;
-  border:          1.5px solid var(--accent);
-  background:      var(--accent-tint);
+  border:          1.5px solid var(--line);
+  background:      var(--card-bg);
   display:         flex;
   align-items:     center;
   justify-content: center;
@@ -302,8 +302,15 @@ main          { animation: pageIn  0.36s var(--ease) 0.06s both; }
   flex-shrink:     0;
   transition:      transform var(--t-fast) var(--ease);
 }
-.card-icon svg, .card-icon img {
+.card-icon svg {
+  display: block;
+  width:   44px;
+  height:  44px;
+}
+.card-icon img {
   display:    block;
+  width:      100%;
+  height:     100%;
   object-fit: contain;
 }
 /* Tall variant (portrait icons like cutlery, wine bottle) */
