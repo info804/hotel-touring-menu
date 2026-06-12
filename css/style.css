@@ -586,6 +586,39 @@ main          { animation: pageIn  0.36s var(--ease) 0.06s both; }
 }
 
 /* ============================================================
+   HIGHLIGHT SECTION (e.g. Crêpes)
+   ============================================================ */
+.cat-section--highlight {
+  background:    var(--card-bg);
+  border:        1.5px solid var(--line);
+  border-radius: var(--r-card);
+  padding:       24px 24px 8px;
+  box-shadow:    0 6px 22px rgba(176,87,48,0.08);
+  position:      relative;
+  overflow:      hidden;
+}
+.cat-section--highlight::before {
+  content:    '';
+  position:   absolute;
+  top:        0;
+  left:       0;
+  right:      0;
+  height:     3px;
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent), var(--accent-tint), var(--accent), var(--accent-deep));
+}
+.cat-section--highlight .cat-header {
+  border-bottom-color: rgba(176,87,48,0.35);
+}
+.cat-section--highlight .cat-header::before {
+  width: 56px;
+  background: var(--accent-deep);
+}
+.cat-section--highlight .cat-name {
+  color:     var(--accent-deep);
+  font-size: 1.65rem;
+}
+
+/* ============================================================
    WINE LIST
    ============================================================ */
 .wine-item {

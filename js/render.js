@@ -53,7 +53,7 @@ function renderMenu(data) {
 
     // --- SECTION ---
     const section = document.createElement('div');
-    section.className = 'cat-section';
+    section.className = 'cat-section' + (cat.special ? ' cat-section--highlight' : '');
     section.id        = 'cat-' + cat.id;
 
     let html = `
