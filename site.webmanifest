@@ -1,0 +1,11 @@
+{
+  "name": "Hotel Touring Livigno — Menù",
+  "short_name": "Menù Touring",
+  "icons": [
+    { "src": "icon.png", "sizes": "192x192", "type": "image/png" }
+  ],
+  "theme_color": "#253D2C",
+  "background_color": "#F0E8D2",
+  "display": "standalone",
+  "start_url": "/"
+}

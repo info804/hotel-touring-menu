@@ -525,7 +525,7 @@ main          { animation: pageIn  0.36s var(--ease) 0.06s both; }
   margin-right:  -8px;
 }
 
-.item-info { flex: 1; }
+.item-info { flex: 1; min-width: 0; }
 
 .item-name {
   font-family: var(--font-display);
@@ -583,6 +583,7 @@ main          { animation: pageIn  0.36s var(--ease) 0.06s both; }
   min-width:   52px;
   text-align:  right;
   padding-top: 2px;
+  flex-shrink: 0;
 }
 
 /* ============================================================

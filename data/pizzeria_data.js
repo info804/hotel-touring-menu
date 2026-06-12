@@ -216,7 +216,7 @@ const PIZZERIA_DATA = {
         },
         {
           name: "Smeraldo",
-          desc: "",
+          desc: "Mozzarella, pistacchio, pesto di basilico, burrata",
           allergens: "1 7",
           price: "15.00"
         }
