@@ -112,15 +112,15 @@ main          { animation: pageIn  0.36s var(--ease) 0.06s both; }
 }
 .lang-switch:hover { background: var(--accent); color: var(--card-bg); }
 
-/* "Special" sticker — top-right corner of the header */
-.header-special {
+/* "Special" sticker — bar page only, top-right corner of the menu bar */
+.bar-special {
   position:    absolute;
-  top:         40px;
-  right:       -28px;
-  z-index:     9;
-  width:       clamp(150px, 26vw, 230px);
+  top:         20px;
+  right:       -13px;
+  z-index:     20;
+  width:       clamp(170px, 28vw, 260px);
   height:      auto;
-  transform:   rotate(45deg);
+  transform:   rotate(32deg);
   transform-origin: center;
   pointer-events: none;
   filter:      drop-shadow(0 4px 10px rgba(0,0,0,0.22));
