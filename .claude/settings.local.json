@@ -5,7 +5,9 @@
       "Bash(for f:*)",
       "Bash(do)",
       "Bash(sed -i 's|    <div class=\"\"footer-bottom\"\">.*</div>\\\\n.*</div>||g' \"$f\")",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(node:*)",
+      "Bash(git add *)"
     ]
   }
 }
