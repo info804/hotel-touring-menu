@@ -115,12 +115,12 @@ main          { animation: pageIn  0.36s var(--ease) 0.06s both; }
 /* "Special" sticker — top-right corner of the header */
 .header-special {
   position:    absolute;
-  top:         58px;
-  right:       10px;
+  top:         40px;
+  right:       -28px;
   z-index:     9;
-  width:       clamp(96px, 16vw, 132px);
+  width:       clamp(150px, 26vw, 230px);
   height:      auto;
-  transform:   rotate(-45deg);
+  transform:   rotate(45deg);
   transform-origin: center;
   pointer-events: none;
   filter:      drop-shadow(0 4px 10px rgba(0,0,0,0.22));
