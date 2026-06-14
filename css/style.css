@@ -115,7 +115,7 @@ main          { animation: pageIn  0.36s var(--ease) 0.06s both; }
 /* "Special" sticker — bar page only, top-right corner of the menu bar */
 .bar-special {
   position:    absolute;
-  top:         6px;
+  top:         26px;
   right:       -10px;
   z-index:     20;
   width:       clamp(150px, 42vw, 270px);
