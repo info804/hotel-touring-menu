@@ -115,13 +115,13 @@ main          { animation: pageIn  0.36s var(--ease) 0.06s both; }
 /* "Special" sticker — bar page only, top-right corner of the menu bar */
 .bar-special {
   position:    absolute;
-  top:         20px;
-  right:       -13px;
+  top:         6px;
+  right:       -10px;
   z-index:     20;
-  width:       clamp(170px, 28vw, 260px);
+  width:       clamp(150px, 42vw, 270px);
   height:      auto;
-  transform:   rotate(32deg);
-  transform-origin: center;
+  transform:   rotate(3deg);
+  transform-origin: top right;
   pointer-events: none;
   filter:      drop-shadow(0 4px 10px rgba(0,0,0,0.22));
 }
