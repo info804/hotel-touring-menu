@@ -18,7 +18,7 @@ const BAR_DATA = {
       id: "caffe",
       name: "CAFFETTERIA",
       items: [
-        { name: "Espresso",                 desc: "",                                           price: "1.40" },
+        { name: "Espresso",                 desc: "",                                           price: "3.00" },
         { name: "Americano",                desc: "",                                           price: "2.00" },
         { name: "Decaffeinato",             desc: "",                                           price: "1.60" },
         { name: "Doppio",                   desc: "",                                           price: "2.80" },
