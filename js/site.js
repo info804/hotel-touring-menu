@@ -14,6 +14,15 @@
     try { fetch(TRACK_URL + '/track?page=' + encodeURIComponent(page), { method: 'POST', mode: 'no-cors' }).catch(function () {}); } catch (e) { /* ignora */ }
   }
 
+  // Tasto flottante "Menù": compare dopo un po' di scroll
+  var fab = document.getElementById('fab');
+  if (fab) {
+    var ticking = false;
+    var upd = function () { ticking = false; fab.classList.toggle('visible', window.scrollY > 320); };
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+    upd();
+  }
+
   var known = null;
   function check() {
     fetch('data/version.json?t=' + Date.now(), { cache: 'no-store' })

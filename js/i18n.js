@@ -32,7 +32,7 @@
   var UI = {
     it: {
       contact: 'Contattaci', pricesEuro: 'Tutti i prezzi indicati in euro.',
-      menu: 'Menù', home: 'Torna ai menù', language: 'Lingua', chooseLanguage: 'Scegli la lingua', close: 'Chiudi',
+      menu: 'Menù', open: 'Apri', home: 'Torna ai menù', language: 'Lingua', chooseLanguage: 'Scegli la lingua', close: 'Chiudi',
       allergens: 'Allergeni', allergensTitle: 'Allergeni', perPerson: 'a persona', tasting: 'Degustazioni',
       gtNote: 'Traduzione automatica: può contenere errori.',
       allergenNote: 'Alcuni prodotti possono essere surgelati o abbattuti secondo il reg. CE 852/04. Per info, rivolgersi al responsabile di sala.',
@@ -40,7 +40,7 @@
     },
     en: {
       contact: 'Contact us', pricesEuro: 'All prices are in euro.',
-      menu: 'Menu', home: 'Back to menus', language: 'Language', chooseLanguage: 'Choose your language', close: 'Close',
+      menu: 'Menu', open: 'Open', home: 'Back to menus', language: 'Language', chooseLanguage: 'Choose your language', close: 'Close',
       allergens: 'Allergens', allergensTitle: 'Allergens', perPerson: 'per person', tasting: 'Tasting menus',
       gtNote: 'Automatic translation: may contain errors.',
       allergenNote: 'Some products may be frozen or blast-chilled in accordance with EC Reg. 852/04. Please ask the dining room manager for information.',
@@ -48,7 +48,7 @@
     },
     de: {
       contact: 'Kontakt', pricesEuro: 'Alle Preise in Euro.',
-      menu: 'Speisekarte', home: 'Zurück zu den Karten', language: 'Sprache', chooseLanguage: 'Sprache wählen', close: 'Schließen',
+      menu: 'Speisekarte', open: 'Öffnen', home: 'Zurück zu den Karten', language: 'Sprache', chooseLanguage: 'Sprache wählen', close: 'Schließen',
       allergens: 'Allergene', allergensTitle: 'Allergene', perPerson: 'pro Person', tasting: 'Degustationsmenüs',
       gtNote: 'Automatische Übersetzung: kann Fehler enthalten.',
       allergenNote: 'Einige Produkte können gemäß EG-Verordnung 852/04 tiefgekühlt oder schockgefrostet sein. Informationen erhalten Sie beim Restaurantleiter.',

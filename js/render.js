@@ -112,6 +112,7 @@
   function mountChrome(titleText, subtitleText, tabs) {
     var h1 = document.getElementById('page-title'), sub = document.getElementById('page-subtitle');
     if (h1) h1.textContent = titleText;
+    var ct = document.getElementById('compact-title'); if (ct) ct.textContent = titleText;
     if (sub) { sub.textContent = subtitleText || ''; sub.hidden = !subtitleText; }
     document.title = titleText + ' — Hotel Touring Livigno';
     var tabsEl = document.getElementById('tabs');
@@ -186,7 +187,7 @@
 
     data.categories.forEach(function (cat) {
       var name = (tr && tr.cats && tr.cats[cat.id]) || cat.name;
-      var sec = el('section', 'cat');
+      var sec = el('section', 'cat' + (cat.special ? ' cat--special' : ''));
       sec.id = 'cat-' + cat.id;
       sec.appendChild(makeHead(name, cat.note));
       cat.items.forEach(function (item) {

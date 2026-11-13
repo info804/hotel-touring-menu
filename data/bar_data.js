@@ -45,6 +45,18 @@ const BAR_DATA = {
       ]
     },
     {
+      id: "crepes",
+      name: "Crêpes",
+      special: true,
+      items: [
+        { name: "Crepes", desc: "Nutella, albicocca, frutti di bosco, zucchero", price: "5,00" },
+        { name: "Aggiunte", desc: "Panna, gelato, scaglie di cocco", price: "+ 0,50" },
+        { name: "Aggiunte", desc: "Banana, macedonia", price: "+ 1,00" },
+        { name: "Topping", desc: "Fragola, cioccolato, frutti di bosco", price: "+ 0,50" },
+        { name: "Grand Marnier", price: "+ 2,00" },
+      ]
+    },
+    {
       id: "dolci",
       name: "Dolci e gelati",
       note: "Coppe, crepes e dolci",
@@ -53,11 +65,6 @@ const BAR_DATA = {
         { name: "Cioccolato", price: "6,00" },
         { name: "Amaretto Disaronno", price: "6,00" },
         { name: "Braulio", price: "6,00" },
-        { sub: "Crepes", name: "Crepes", desc: "Nutella, albicocca, frutti di bosco, zucchero", price: "5,00" },
-        { name: "Aggiunte", desc: "Panna, gelato, scaglie di cocco", price: "+ 0,50" },
-        { name: "Aggiunte", desc: "Banana, macedonia", price: "+ 1,00" },
-        { name: "Topping", desc: "Fragola, cioccolato, frutti di bosco", price: "+ 0,50" },
-        { name: "Grand Marnier", price: "+ 2,00" },
         { sub: "Coppe gelato", name: "Gelato", desc: "1 pallina / 2 palline", price: "1,80/2,50" },
         { name: "Coppa Danemark", desc: "Gelato alla vaniglia, gelato e topping al cioccolato, panna", price: "6,00" },
         { name: "Coppa Arlecchino", desc: "Gelato fragola e vaniglia, topping alla frutta, macedonia, panna", price: "7,00" },
