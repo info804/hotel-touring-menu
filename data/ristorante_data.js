@@ -1,433 +1,142 @@
 /**
  * ============================================================
- *  TABELLA RISTORANTE — Hotel Touring Livigno
- *  Modifica nome, desc, price e allergens di ogni piatto.
- *  allergens: codici numerici EU (es. "1 7 10")
+ * RISTORANTE — Hotel Touring Livigno · Inverno 2026
+ * Campi: name, desc, allergens (codici EU, es. "1-7"), price (come stampato, es. "7,50").
+ * sub: titolo di sottogruppo, sulla prima voce del gruppo.
+ * Le traduzioni EN/DE stanno in data/i18n/ (non modificare qui).
  * ============================================================
  */
 
 const RISTORANTE_DATA = {
   title: "Ristorante",
-  subtitle: "Specialità della cucina Valtellinese e piatti di montagna",
+  subtitle: "Specialità della cucina valtellinese e piatti di montagna",
 
   categories: [
-
-    // --------------------------------------------------------
-    // MENÙ DEGUSTAZIONE
-    // --------------------------------------------------------
-    {
-      id: "degustazione",
-      name: "MENÙ DEGUSTAZIONE",
-      note: "Prezzo fisso a persona",
-      items: [
-        {
-          name: "Degustazione Valtellinese",
-          desc: "Bresaola di Livigno con lamelle di Casera servita con sciatt · Pizzoccheri fatti in casa alla Valtellinese · Tzigoiner con verdure grigliate e patate al forno · Sorbetto al Braulio",
-          allergens: "1 3 5 7 10",
-          price: "49.00"
-        },
-        {
-          name: "Menù Selvaggina",
-          desc: "Slinziga di cervo con burro al ginepro e funghi porcini sott'olio · Rustici fatti a mano al ragù di capriolo · Salmì di cervo con polenta taragna · Gelato alla Taneda",
-          allergens: "1 3 5 7 9 12",
-          price: "55.00"
-        }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // ANTIPASTI
-    // --------------------------------------------------------
     {
       id: "antipasti",
-      name: "ANTIPASTI",
+      name: "Antipasti",
       items: [
-        {
-          name: "Il nostro tagliere di salumi e formaggi con giardiniera fresca",
-          desc: "",
-          allergens: "7 9 10 12",
-          price: "18.00"
-        },
-        {
-          name: "Sciatt Valtellinesi su letto d'insalata e vinaigrette all'aceto di mele",
-          desc: "",
-          allergens: "1 5 7 10",
-          price: "12.00"
-        },
-        {
-          name: "Fiocco di prosciutto di Parma con burrata di bufala",
-          desc: "",
-          allergens: "7",
-          price: "19.00"
-        },
-        {
-          name: "Tagliere di formaggi locali accompagnati da composte di frutta",
-          desc: "",
-          allergens: "7 10",
-          price: "17.00"
-        },
-        {
-          name: "Bruschetta all'Italiana",
-          desc: "",
-          allergens: "1",
-          price: "12.00"
-        },
-        {
-          name: "Slinziga di cervo con funghi porcini sott'olio e crostini di pane",
-          desc: "",
-          allergens: "1 5 7",
-          price: "15.00"
-        },
-        {
-          name: "Bresaola Livignasca con rucola e grana",
-          desc: "",
-          allergens: "7",
-          price: "22.00"
-        },
-        {
-          name: "Carpaccio di scottona con sedano, scaglie di grana e pomodorini",
-          desc: "",
-          allergens: "7 9",
-          price: "16.00"
-        }
+        { sub: "Dalla Valtellina", name: "Slinzega di cervo con burro al ginepro e funghi porcini sott'olio", allergens: "1-5-7", price: "22" },
+        { name: "Il nostro tagliere di salumi e formaggi con giardiniera fresca", allergens: "7-9-10-12", price: "18" },
+        { name: "Bresaola di Livigno con lamelle di Casera e sciatt valtellinesi", allergens: "1-5-7-10-12", price: "17" },
+        { name: "Bresaola punta d'anca 100% italiana con lamelle di sedano, funghi porcini trifolati e scaglie di grana", allergens: "7-9-10-12", price: "18" },
+        { name: "Tagliere di formaggi locali accompagnato da composte di frutta", allergens: "7-10", price: "17" },
+        { name: "Sciatt valtellinesi su letto d'insalata e vinaigrette all'aceto di mele", allergens: "1-5-7-10-12", price: "13" },
+        { sub: "Sapori d'Italia", name: "Tartare di manzo con stracciatella di bufala e lamelle di tartufo", allergens: "1-7", price: "22" },
+        { name: "Tris di pesce affumicato con crostini di pane e riccioli di burro (spada-tonno-salmone)", allergens: "1-4-7", price: "18" },
+        { name: "Insalata caprese con mozzarella di bufala", allergens: "7", price: "12" },
+        { name: "Bruschetta all'italiana", allergens: "1", price: "12" },
       ]
     },
-
-    // --------------------------------------------------------
-    // PRIMI PIATTI
-    // --------------------------------------------------------
     {
       id: "primi",
-      name: "PRIMI PIATTI",
+      name: "Primi piatti",
       items: [
-        {
-          name: "Pizzoccheri Valtellinesi fatti a mano con Casera DOP",
-          desc: "",
-          allergens: "1 3 5 7",
-          price: "16.00"
-        },
-        {
-          name: "Tagliolini freschi ai funghi porcini con lamelle di tartufo estivo",
-          desc: "",
-          allergens: "1 3 5 7 9 12",
-          price: "18.00"
-        },
-        {
-          name: "Rustici di grano saraceno al capriolo e ricco sugo",
-          desc: "",
-          allergens: "1 3 5 7 9 12",
-          price: "17.00"
-        },
-        {
-          name: "Risotto cremoso al caprino con dolci note di pera e speck croccante",
-          desc: "",
-          allergens: "7 9 12",
-          price: "20.00"
-        },
-        {
-          name: "Spaghetti alla carbonara con pecorino romano e guanciale",
-          desc: "",
-          allergens: "1 3 5 7",
-          price: "14.00"
-        },
-        {
-          name: "Spaghettoni di Gragnano con scampi e pomodorini",
-          desc: "",
-          allergens: "1 2 4 5 7",
-          price: "22.00"
-        },
-        {
-          name: "Lasagne della tradizione romagnola",
-          desc: "",
-          allergens: "1 3 7 9 12",
-          price: "14.00"
-        }
+        { sub: "Tradizione di montagna", name: "Pizzoccheri valtellinesi fatti a mano al profumo d'erbe e Casera DOP", allergens: "1-3-5-7", price: "16" },
+        { name: "Rustici al capriolo con il suo sugo", allergens: "1-3-5-7-9-12", price: "18" },
+        { name: "Tagliatelle ai funghi porcini", allergens: "1-3-5-7", price: "18" },
+        { name: "Spätzle verdi allo speck tirolese croccante", allergens: "1-3-7", price: "15" },
+        { sub: "Classici italiani", name: "Lasagna gratinata della tradizione romagnola", allergens: "1-3-7-9-12", price: "15" },
+        { name: "Spaghetti alla carbonara con pecorino romano e guanciale", allergens: "1-3-7", price: "15" },
+        { name: "Chicche di patate con pomodorini Pachino bicolore al profumo di basilico", allergens: "1-3-7-9", price: "14" },
+        { name: "Pasta al pomodoro / ragù alla bolognese / pesto genovese", allergens: "1-7-9 / 1-7-9-12 / 1-7-8", price: "12" },
+        { name: "Risotto alla milanese", allergens: "7-9-12", price: "21" },
+        { name: "Risotto alla milanese con ossobuco di vitello in gremolada", allergens: "1-5-7-9-12", price: "25" },
       ]
     },
-
-    // --------------------------------------------------------
-    // ZUPPE
-    // --------------------------------------------------------
     {
       id: "zuppe",
-      name: "ZUPPE",
+      name: "Zuppe",
       items: [
-        {
-          name: "Minestrone di verdure fresco con croccanti crostini di pane",
-          desc: "",
-          allergens: "1 9",
-          price: "12.00"
-        },
-        {
-          name: "Crema di pomodoro con soffice fiocco di panna",
-          desc: "",
-          allergens: "1 7",
-          price: "10.00"
-        }
+        { name: "Crema di pomodoro con fiocco di panna e crostini di pane", allergens: "1-7-9", price: "11" },
+        { name: "Zuppa di cipolle in crosta di pasta sfoglia con sesamo", allergens: "1-3-7-9-11", price: "14" },
+        { name: "Minestrone di verdure fresche dell'orto", allergens: "9", price: "11" },
+        { name: "Vellutata di zucca delica con crostini", allergens: "1-7-9", price: "11" },
+        { name: "Crema di asparagi con lamelle di mandorle tostate", allergens: "1-8-9", price: "11" },
+        { name: "Vellutata di porri e patate", allergens: "1-7-9", price: "11" },
+        { name: "Zuppa di gulasch all'ungherese", allergens: "1-9-12", price: "15" },
       ]
     },
-
-    // --------------------------------------------------------
-    // SECONDI PIATTI
-    // --------------------------------------------------------
     {
       id: "secondi",
-      name: "SECONDI PIATTI",
+      name: "Secondi",
       items: [
-        {
-          name: "Filetto di manzo alla griglia / ai funghi porcini",
-          desc: "",
-          allergens: "1 7 9 12",
-          price: "32.00 / 36.00"
-        },
-        {
-          name: "Rognoncino di vitello trifolato, servito con crostone di polenta",
-          desc: "",
-          allergens: "1 7 9 12",
-          price: "18.00"
-        },
-        {
-          name: "Tzigoiner Valtellinese con patate saltate e verdure grigliate",
-          desc: "",
-          allergens: "7",
-          price: "22.00"
-        },
-        {
-          name: "Piatto del montanaro: gorgonzola, polenta, uovo e speck croccante",
-          desc: "",
-          allergens: "3 7",
-          price: "16.00"
-        },
-        {
-          name: "Filetto di trota di montagna profumato alle erbe alpine",
-          desc: "",
-          allergens: "4 7",
-          price: "22.00"
-        },
-        {
-          name: "Cotoletta di vitello alla milanese",
-          desc: "",
-          allergens: "1 3 5",
-          price: "32.00"
-        },
-        {
-          name: "Costolette d'agnello alla scottadito",
-          desc: "",
-          allergens: "5",
-          price: "28.00"
-        },
-        {
-          name: "Suprema di pollo alla griglia",
-          desc: "",
-          allergens: "5",
-          price: "17.00"
-        },
-        {
-          name: "Salmì di cervo accompagnato da polenta taragna",
-          desc: "",
-          allergens: "1 7 9 12",
-          price: "22.00"
-        },
-        {
-          name: "Tagliata di manzo con rucola e scaglie di grana",
-          desc: "",
-          allergens: "5 7",
-          price: "25.00"
-        },
-        {
-          name: "Misto di verdure di stagione con tomino grigliato",
-          desc: "",
-          allergens: "",
-          price: "17.00"
-        }
+        { name: "Salmì di cervo con polenta taragna", allergens: "1-7-9-12", price: "22" },
+        { name: "Tzigoiner valtellinese con patate saltate e verdure grigliate", allergens: "5-7", price: "22" },
+        { name: "Tagliata di manzo con funghi porcini di selva", allergens: "5-7-12", price: "28" },
+        { name: "Costoletta d'agnello allo scottadito con patate saltate alle erbe e verdure grigliate", allergens: "5-7", price: "28" },
+        { name: "Filetto di manzo alla griglia con patate fritte e verdure grigliate", allergens: "5", price: "32" },
+        { name: "Cotoletta alla milanese (400 g) con osso e patatine fritte", allergens: "1-3-5", price: "32" },
+        { name: "Suprema di pollo alla griglia con insalatina mista di stagione", allergens: "5", price: "18" },
+        { name: "Trota spinata alle erbe di montagna con patate al vapore", allergens: "1-4-7", price: "24" },
+        { name: "Piatto del montanaro: gorgonzola, polenta taragna, uovo e speck croccante", allergens: "3-7", price: "17" },
+        { name: "Casera alla griglia caramellato al miele con pere, noci e crostone di polenta", allergens: "7-8", price: "16" },
       ]
     },
-
-    // --------------------------------------------------------
-    // PER I PIÙ PICCOLI
-    // --------------------------------------------------------
-    {
-      id: "bambini",
-      name: "PER I PIÙ PICCOLI",
-      note: "Possibile porzione adulto +€ 4.00",
-      items: [
-        {
-          name: "Pasta al pomodoro / ragù alla bolognese / pesto genovese",
-          desc: "",
-          allergens: "1 7 8 9 12",
-          price: "8.00"
-        },
-        {
-          name: "Passato di verdure con crostini",
-          desc: "",
-          allergens: "1 9",
-          price: "8.00"
-        },
-        {
-          name: "Lasagne della tradizione romagnola",
-          desc: "",
-          allergens: "1 3 7 9 12",
-          price: "10.00"
-        },
-        {
-          name: "Tzigoiner con patatine fritte",
-          desc: "",
-          allergens: "1",
-          price: "12.00"
-        },
-        {
-          name: "Cotoletta di vitello alla milanese con patatine fritte",
-          desc: "",
-          allergens: "1 3",
-          price: "12.00"
-        },
-        {
-          name: "Paillard di vitello con pomodorini",
-          desc: "",
-          allergens: "",
-          price: "12.00"
-        },
-        {
-          name: "Wurstel alla griglia con patatine fritte",
-          desc: "",
-          allergens: "1",
-          price: "10.00"
-        }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // INSALATE
-    // --------------------------------------------------------
-    {
-      id: "insalate",
-      name: "INSALATE",
-      items: [
-        {
-          name: "Insalata verde",
-          desc: "",
-          allergens: "",
-          price: "6.00"
-        },
-        {
-          name: "Insalata mista",
-          desc: "Insalata, pomodori, cetrioli, carote e finocchi",
-          allergens: "",
-          price: "7.00"
-        },
-        {
-          name: "Insalata cipolle e pomodoro",
-          desc: "",
-          allergens: "",
-          price: "6.00"
-        },
-        {
-          name: "Insalata Caprese",
-          desc: "Pomodoro e mozzarella di bufala e basilico",
-          allergens: "7",
-          price: "12.00"
-        },
-        {
-          name: "Insalata Caesar",
-          desc: "Misticanza, olive taggiasche, pomodorini, petto di pollo, scaglie di grana, finocchi",
-          allergens: "1 7 10",
-          price: "12.00"
-        },
-        {
-          name: "Insalata Pescatora",
-          desc: "Insalata verde, pomodorini, acciughe, capperi, tonno",
-          allergens: "4",
-          price: "14.00"
-        },
-        {
-          name: "Insalata Greca",
-          desc: "Insalata verde, pomodorini, cetrioli, olive verdi, feta",
-          allergens: "7",
-          price: "14.00"
-        },
-        {
-          name: "Insalata la Fiordilatte",
-          desc: "Insalata verde, pomodorini, mozzarelline e scaglie di grana",
-          allergens: "7",
-          price: "12.00"
-        },
-        {
-          name: "Insalata l'Atomica",
-          desc: "Insalata verde, tonno, mozzarelline, mais, peperoni, uovo sodo, cetrioli",
-          allergens: "3 4 7",
-          price: "15.00"
-        }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // CONTORNI
-    // --------------------------------------------------------
     {
       id: "contorni",
-      name: "CONTORNI",
+      name: "Contorni",
       items: [
-        {
-          name: "Polenta taragna",
-          desc: "",
-          allergens: "7",
-          price: "6.00"
-        },
-        {
-          name: "Patatine fritte",
-          desc: "",
-          allergens: "1",
-          price: "7.00"
-        },
-        {
-          name: "Patate al forno",
-          desc: "",
-          allergens: "1",
-          price: "6.00"
-        },
-        {
-          name: "Verdure alla griglia",
-          desc: "",
-          allergens: "",
-          price: "6.00"
-        },
-        {
-          name: "Funghi porcini di selva trifolati",
-          desc: "",
-          allergens: "7",
-          price: "12.00"
-        }
+        { name: "Polenta taragna", allergens: "7", price: "6" },
+        { name: "Patate fritte", allergens: "5", price: "6" },
+        { name: "Verdure alla griglia", price: "7" },
+        { name: "Funghi porcini di selva trifolati", allergens: "7", price: "12" },
+        { name: "Patate saltate", allergens: "5-7", price: "6" },
+        { name: "Patate al vapore", price: "6" },
+        { name: "Insalata mista", price: "7" },
+        { name: "Insalata verde", price: "6" },
+        { name: "Insalata Caesar", allergens: "1-7-10", price: "12" },
+        { name: "Insalata di pomodori e cipolle", price: "6" },
       ]
     },
-
-    // --------------------------------------------------------
-    // BEVANDE
-    // --------------------------------------------------------
     {
-      id: "drinks",
-      name: "BEVANDE",
+      id: "bambini",
+      name: "Per i più piccoli",
       items: [
-        { name: "Acqua 0,5 L",                        desc: "",                        allergens: "", price: "2.00" },
-        { name: "Acqua 0,75 L",                       desc: "",                        allergens: "", price: "3.00" },
-        { name: "Bibite 0,3 L",                       desc: "",                        allergens: "", price: "3.00" },
-        { name: "Bibite 0,4 L",                       desc: "",                        allergens: "", price: "4.00" },
-        { name: "Bibite in lattina",                  desc: "",                        allergens: "", price: "3.50" },
-        { name: "Bibite in vetro",                    desc: "",                        allergens: "", price: "4.00" },
-        { name: "Succhi di frutta",                   desc: "",                        allergens: "", price: "3.50" },
-        { name: "Spremuta d'arancia",                 desc: "",                        allergens: "", price: "4.00" },
-        { name: "Birra alla spina Calanda 0,3 L",     desc: "",                        allergens: "", price: "3.50" },
-        { name: "Birra alla spina Calanda 0,5 L",     desc: "",                        allergens: "", price: "6.00" },
-        { name: "Radler / Panache 0,3 L",             desc: "",                        allergens: "", price: "3.50" },
-        { name: "Radler / Panache 0,5 L",             desc: "",                        allergens: "", price: "6.00" },
-        { name: "1816 Livigno",                       desc: "Birra artigianale locale", allergens: "", price: "8.00" },
-        { name: "Weizen Paulaner",                    desc: "",                        allergens: "", price: "6.00" },
-        { name: "Heineken",                           desc: "",                        allergens: "", price: "4.00" },
-        { name: "Corona",                             desc: "",                        allergens: "", price: "4.00" },
-        { name: "Chimay",                             desc: "",                        allergens: "", price: "4.00" },
-        { name: "Weiss analcolica",                   desc: "",                        allergens: "", price: "4.00" },
-        { name: "Moretti analcolica",                 desc: "",                        allergens: "", price: "4.00" }
+        { name: "Pasta baby al pomodoro / ragù baby alla bolognese / al pesto baby genovese", desc: "Porzione adulti 12", allergens: "1-9 / 1-9-12 / 1-7-8", price: "8" },
+        { name: "Passato di verdure", allergens: "9", price: "8" },
+        { name: "Lasagne baby gratinate della tradizione romagnola", allergens: "1-3-7-9-12", price: "11" },
+        { name: "Cotoletta di pollo alla milanese baby con patatine fritte", allergens: "1-3-5", price: "12" },
+        { name: "Controfiletto di manzo baby con pomodorini", price: "14" },
+        { name: "Würstel alla griglia baby con patatine fritte", allergens: "5", price: "10" },
+      ]
+    },
+    {
+      id: "dolci",
+      name: "Dolci",
+      items: [
+        { name: "Tiramisù della casa", allergens: "1-3-7", price: "7" },
+        { name: "Crème brûlée", allergens: "3-7", price: "7" },
+        { name: "Crepes", desc: "Nutella, marmellata o zucchero", allergens: "1-3-7-8", price: "5" },
+        { name: "Sorbetto al Braulio", allergens: "3-7", price: "8" },
+        { name: "Sorbetto al limone (analcolico / alcolico)", price: "6/8" },
+        { name: "Strudel di mele accompagnato da gelato alla vaniglia e panna montata", allergens: "1-3-7-8", price: "8" },
+        { name: "Cremoso ai tre cioccolati", desc: "cioccolato fondente, cioccolato al latte, cioccolato bianco", allergens: "3-7-8", price: "10" },
+        { name: "Fantasia Touring", desc: "tiramisù, cheesecake ai frutti rossi, cremoso ai tre cioccolati", allergens: "1-3-7-8", price: "12" },
+        { name: "Torta Sacher", allergens: "1-3-7-8", price: "7" },
+        { name: "Gelato alla Taneda", allergens: "7", price: "7" },
+      ]
+    },
+    {
+      id: "bevande",
+      name: "Bevande",
+      items: [
+        { sub: "Classiche", name: "Acqua 0,5 / 0,75 l", price: "2/3" },
+        { name: "Bibite 0,3 / 0,4 l", desc: "Coca-Cola, Fanta, Sprite, Tè pesca-limone", price: "3/4" },
+        { name: "Bibite in lattina", desc: "Tè pesca-limone, Lemonsoda", price: "3,50" },
+        { name: "Bibite in vetro", desc: "Coca, Coca zero, Fanta, Sprite, Lurisia", price: "4" },
+        { name: "Succhi di frutta", desc: "Ace, Albicocca, Ananas, Arancia, Mirtilli, Pesca, Pera, Pompelmo, Mela", price: "3,50" },
+        { name: "Spremuta d'arancia", price: "4,00" },
+        { name: "Birra alla spina Nastro Azzurro 0,3 / 0,5 l", price: "3,50/6" },
+        { name: "Radler-Panachè 0,3 / 0,5 l", price: "3,50/6" },
+        { sub: "Birre in bottiglia", name: "1816 Livigno", desc: "Pils, Weiss, IPA", price: "8" },
+        { name: "Weizen Paulaner", price: "6" },
+        { name: "Heineken", price: "4" },
+        { name: "Corona", price: "4" },
+        { name: "Chimay", price: "4" },
+        { name: "Weiss analcolica", price: "4" },
+        { name: "Moretti analcolica", price: "4" },
       ]
     }
-
   ]
 };

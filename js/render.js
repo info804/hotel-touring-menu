@@ -1,388 +1,227 @@
 /**
- * render.js — Menu rendering engine
- * Features: sticky tabs, scroll-spy with tab centering, smooth animations
+ * render.js — motore di rendering dei menù
+ * Costruisce DOM con textContent (nessun innerHTML su dati): sicuro anche se un testo contiene < o &.
+ * Traduzioni native: window.I18N[pagina][lingua] = { cats, subs, items } (vedi data/i18n/).
  */
+(function () {
+  'use strict';
 
-// Suppress scroll-spy while a tab click is animating
-let _clickScrolling = false;
-let _clickScrollTimer;
+  var RIDGE = '<svg class="ridge" viewBox="0 0 112 14" fill="none" aria-hidden="true"><path d="M1 12.5 L16 8 L25 10.5 L44 2 L55 8.5 L63 6 L78 11 L87 8.5 L111 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-/* -------------------------------------------------------
-   renderMenu(data) — bar.html, ristorante.html, pizzeria.html
-------------------------------------------------------- */
-function renderMenu(data) {
-  if (!data) return;
+  var PAGE_TEXT = {
+    ristorante: { en: ['Restaurant', 'Valtellina specialities and mountain dishes'], de: ['Restaurant', 'Veltliner Spezialitäten und Bergküche'] },
+    pizzeria:   { en: ['Pizzeria', 'Our pizzas'], de: ['Pizzeria', 'Unsere Pizzen'] }
+  };
 
-  const titleEl    = document.getElementById('page-title');
-  const subtitleEl = document.getElementById('page-subtitle');
-  if (titleEl)    titleEl.textContent = data.title;
-  if (subtitleEl) subtitleEl.textContent = data.subtitle || '';
+  var scrollLock = false, lockTimer = 0;
 
-  const tabsEl    = document.getElementById('cat-tabs');
-  const container = document.getElementById('menu-container');
-  if (!container) return;
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null && text !== '') n.textContent = text;
+    return n;
+  }
+  function fmtPrice(p) { return String(p).replace(/\./g, ','); }
+  var REGIONS = /(lombardia|piemonte|veneto|trentino|friuli|toscana|emilia|sicilia|puglia|campania|umbria|marche|abruzzo|sardegna|liguria|lazio|francia|alto adige)/g;
+  function sentence(s) {
+    if (s !== s.toUpperCase()) return s;
+    var l = s.toLowerCase();
+    l = l.charAt(0).toUpperCase() + l.slice(1);
+    l = l.replace(REGIONS, function (m) { return m.charAt(0).toUpperCase() + m.slice(1); });
+    return l.replace(/\ba\.\a\./g, 'A.A.');
+  }
+  function tabLabel(name) {
+    var t = name.replace(/^Vini\s+/i, '').replace(/spumanti.*champagne/i, 'Spumanti').replace(/\s—\s/g, ' · ');
+    return t.charAt(0).toUpperCase() + t.slice(1);
+  }
+  function prefersReduced() { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  function scrollToCat(id, smooth) {
+    var t = document.getElementById(id);
+    if (!t) return;
+    t.scrollIntoView({ behavior: (smooth && !prefersReduced()) ? 'smooth' : 'auto', block: 'start' });
+  }
 
-  // Build tabs + sections
-  data.categories.forEach((cat, i) => {
-    // --- TAB ---
-    if (tabsEl) {
-      const tab = document.createElement('a');
-      tab.href      = '#cat-' + cat.id;
-      tab.className = 'cat-tab' + (i === 0 ? ' active' : '');
-      tab.textContent = cat.name.replace('PIZZE ', '').replace('BEVANDE ', '');
-      tab.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = document.getElementById('cat-' + cat.id);
-        if (target) {
-          _clickScrolling = true;
-          clearTimeout(_clickScrollTimer);
-          _clickScrollTimer = setTimeout(() => { _clickScrolling = false; }, 900);
+  function makeHead(name, note) {
+    var h = el('div', 'cat-head');
+    h.appendChild(el('h2', '', name));
+    h.insertAdjacentHTML('beforeend', RIDGE);
+    if (note) h.appendChild(el('p', 'cat-note', note));
+    return h;
+  }
 
-          const tabsH = tabsEl.offsetHeight;
-          const targetY = target.getBoundingClientRect().top + window.scrollY - tabsH;
-          window.scrollTo({ top: targetY, behavior: 'smooth' });
+  /* ---------------- piatto / bevanda ---------------- */
+  function dishNode(item, tr) {
+    var d = el('article', 'dish');
+    var row = el('div', 'dish-row');
+    var name = el('h3', 'dish-name', item.name);
+    if (item.allergens) name.appendChild(el('span', 'al', String(item.allergens).replace(/\s+/g, '-')));
+    row.appendChild(name);
+    if (item.price) row.appendChild(el('span', 'price', fmtPrice(item.price)));
+    d.appendChild(row);
+    var key = window.TL.slugify(item.name);
+    var desc = (tr && tr.items && tr.items[key]) || item.desc;
+    if (desc) d.appendChild(el('p', 'dish-desc', desc));
+    return d;
+  }
 
-          // Update active tab and center it immediately
-          tabsEl.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-        }
-        centerTab(tab);
-      });
-      tabsEl.appendChild(tab);
-    }
+  function wineNode(item) {
+    var w = el('article', 'wine');
+    var info = el('div', 'wine-info');
+    info.appendChild(el('div', 'wine-name', item.name));
+    if (item.producer) info.appendChild(el('div', 'wine-producer', item.producer));
+    if (item.notes) info.appendChild(el('div', 'wine-notes', item.notes));
+    w.appendChild(info);
+    var pr = el('div', 'wine-prices');
+    if (item.bottle) pr.appendChild(el('span', 'wine-bottle', fmtPrice(item.bottle)));
+    if (item.glass) pr.appendChild(el('span', 'wine-glass', 'calice ' + fmtPrice(item.glass)));
+    w.appendChild(pr);
+    return w;
+  }
 
-    // --- SECTION ---
-    const section = document.createElement('div');
-    section.className = 'cat-section' + (cat.special ? ' cat-section--highlight' : '');
-    section.id        = 'cat-' + cat.id;
-
-    let html = `
-      <div class="cat-header">
-        <span class="cat-name">${cat.name}</span>
-        ${cat.note ? `<span class="cat-desc-small">${cat.note}</span>` : ''}
-      </div>
-    `;
-
-    cat.items.forEach(item => {
-      const tags = (item.tags || []).map(t => {
-        const map = { veg: ['veg','Vegetariano'], gf: ['gf','Senza glutine'], hot: ['hot','Piccante'] };
-        const [cls, label] = map[t] || ['veg', t];
-        return `<span class="tag tag-${cls}">${label}</span>`;
-      }).join('');
-
-      html += `
-        <div class="menu-item">
-          <div class="item-info">
-            <div class="item-name">${item.name}</div>
-            ${item.desc ? `<div class="item-desc">${item.desc}</div>` : ''}
-            ${tags ? `<div class="item-tags">${tags}</div>` : ''}
-            ${item.allergens ? `<div class="item-allergens">Allergeni: ${item.allergens}</div>` : ''}
-          </div>
-          ${item.price ? `<div class="item-price">€ ${item.price}</div>` : '<div class="item-price"></div>'}
-        </div>
-      `;
-    });
-
-    section.innerHTML = html;
-    container.appendChild(section);
-  });
-
-  // Staggered entrance animation
-  animateSections();
-
-  // Scroll-spy
-  initScrollSpy();
-
-  // Floating back button
-  initFab();
-}
-
-/* -------------------------------------------------------
-   renderWine(data) — vini.html
-------------------------------------------------------- */
-function renderWine(data) {
-  if (!data) return;
-
-  const titleEl    = document.getElementById('page-title');
-  const subtitleEl = document.getElementById('page-subtitle');
-  if (titleEl)    titleEl.textContent = data.title;
-  if (subtitleEl) subtitleEl.textContent = data.subtitle || '';
-
-  const tabsEl    = document.getElementById('cat-tabs');
-  const container = document.getElementById('menu-container');
-  if (!container) return;
-
-  data.categories.forEach((cat, i) => {
-    if (tabsEl) {
-      const tab = document.createElement('a');
-      tab.href      = '#cat-' + cat.id;
-      tab.className = 'cat-tab' + (i === 0 ? ' active' : '');
-      // Shorten tab labels for the tab bar
-      tab.textContent = cat.name
-        .replace('VINI ROSSI — ', '')
-        .replace('VINI ', '')
-        .replace('SPUMANTI & CHAMPAGNE', 'Spumanti')
-        .replace('VINI DA DESSERT', 'Dessert');
-      tab.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = document.getElementById('cat-' + cat.id);
-        if (target) {
-          _clickScrolling = true;
-          clearTimeout(_clickScrollTimer);
-          _clickScrollTimer = setTimeout(() => { _clickScrolling = false; }, 900);
-
-          const tabsH = tabsEl.offsetHeight;
-          const targetY = target.getBoundingClientRect().top + window.scrollY - tabsH;
-          window.scrollTo({ top: targetY, behavior: 'smooth' });
-
-          tabsEl.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-        }
-        centerTab(tab);
-      });
-      tabsEl.appendChild(tab);
-    }
-
-    const section = document.createElement('div');
-    section.className = 'cat-section';
-    section.id        = 'cat-' + cat.id;
-
-    let html = `
-      <div class="cat-header">
-        <span class="cat-name">${cat.name}</span>
-        ${cat.note ? `<span class="cat-desc-small">${cat.note}</span>` : ''}
-      </div>
-    `;
-
-    cat.items.forEach(item => {
-      html += `
-        <div class="wine-item">
-          <div class="wine-info">
-            <div class="wine-name">${item.name}</div>
-            ${item.producer ? `<div class="wine-producer">${item.producer}</div>` : ''}
-            ${item.notes    ? `<div class="wine-notes">${item.notes}</div>` : ''}
-          </div>
-          <div class="wine-prices">
-            ${item.bottle ? `<span class="wine-price-bottle">€ ${item.bottle}</span>` : ''}
-            ${item.glass  ? `<span class="wine-price-glass">calice € ${item.glass}</span>` : ''}
-          </div>
-        </div>
-      `;
-    });
-
-    section.innerHTML = html;
-    container.appendChild(section);
-  });
-
-  animateSections();
-  initScrollSpy();
-  initFab();
-}
-
-/* -------------------------------------------------------
-   renderSpeciali(data) — speciali.html
-------------------------------------------------------- */
-function renderSpeciali(data) {
-  if (!data) return;
-
-  const params    = new URLSearchParams(window.location.search);
-  const activeKey = params.get('menu') || Object.keys(data)[0];
-  const tabsEl    = document.getElementById('special-tabs');
-  const container = document.getElementById('special-container');
-  if (!tabsEl || !container) return;
-
-  Object.keys(data).forEach(key => {
-    const menu = data[key];
-
-    // Tab button
-    const btn = document.createElement('button');
-    btn.className   = 'special-tab-btn' + (key === activeKey ? ' active' : '');
-    btn.textContent = menu.tabLabel || menu.title;
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.special-tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.special-menu-block').forEach(b => {
-        b.style.opacity = '0';
-        b.style.transform = 'translateY(8px)';
-        setTimeout(() => { b.classList.remove('active'); }, 150);
-      });
-      btn.classList.add('active');
-      const block = document.getElementById('block-' + key);
-      setTimeout(() => {
-        block.classList.add('active');
-        requestAnimationFrame(() => {
-          block.style.opacity = '1';
-          block.style.transform = 'translateY(0)';
+  /* ---------------- degustazioni (da SPECIALI_DATA) ---------------- */
+  function tastingSection(spec, tr) {
+    var tt = window.I18N && window.I18N.speciali && window.I18N.speciali[window.TL.lang];
+    var sec = el('section', 'cat');
+    sec.id = 'cat-degustazioni';
+    sec.appendChild(makeHead(window.TL.t('tasting')));
+    Object.keys(spec).forEach(function (k) {
+      var m = spec[k];
+      var box = el('div', 'tasting');
+      var head = el('div', 'tasting-head');
+      head.appendChild(el('h3', '', (tt && tt.menus && tt.menus[k]) || m.title));
+      var right = el('div');
+      right.appendChild(el('div', 'tasting-price', fmtPrice(m.fixedPrice)));
+      right.appendChild(el('div', 'tasting-per', window.TL.t('perPerson')));
+      head.appendChild(right);
+      box.appendChild(head);
+      (m.courses || []).forEach(function (c) {
+        var cs = el('div', 'course');
+        cs.appendChild(el('div', 'course-name', (tt && tt.courses && tt.courses[window.TL.slugify(c.name)]) || c.name));
+        (c.dishes || []).forEach(function (dish) {
+          var tr2 = tt ? { items: tt.items } : null;
+          cs.appendChild(dishNode(dish, tr2));
         });
-      }, 160);
-      document.getElementById('page-title').textContent = menu.title;
-      const url = new URL(window.location);
-      url.searchParams.set('menu', key);
-      window.history.replaceState({}, '', url);
-    });
-    tabsEl.appendChild(btn);
-
-    // Content block
-    const block = document.createElement('div');
-    block.className = 'special-menu-block' + (key === activeKey ? ' active' : '');
-    block.id        = 'block-' + key;
-    block.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
-
-    let html = '';
-    if (menu.fixedPrice) {
-      html += `
-        <div class="special-price-banner">
-          <div>
-            <div class="special-price-label">Menù fisso a persona</div>
-            ${menu.priceNote ? `<div class="special-price-note">${menu.priceNote}</div>` : ''}
-          </div>
-          <div class="special-price-amount">€ ${menu.fixedPrice}</div>
-        </div>
-      `;
-    }
-
-    (menu.courses || []).forEach(course => {
-      html += `<div class="special-course">`;
-      html += `<div class="special-course-title">${course.name}</div>`;
-      (course.dishes || []).forEach(dish => {
-        html += `
-          <div class="special-dish">
-            <div class="special-dish-name">${dish.name}</div>
-            ${dish.desc ? `<div class="special-dish-desc">${dish.desc}</div>` : ''}
-          </div>
-        `;
+        box.appendChild(cs);
       });
-      html += `</div>`;
+      sec.appendChild(box);
     });
+    return sec;
+  }
 
-    if (menu.includes) {
-      html += `<div class="special-includes"><p>${menu.includes}</p></div>`;
+  /* ---------------- struttura comune ---------------- */
+  function mountChrome(titleText, subtitleText, tabs) {
+    var h1 = document.getElementById('page-title'), sub = document.getElementById('page-subtitle');
+    if (h1) h1.textContent = titleText;
+    if (sub) { sub.textContent = subtitleText || ''; sub.hidden = !subtitleText; }
+    document.title = titleText + ' — Hotel Touring Livigno';
+    var tabsEl = document.getElementById('tabs');
+    if (!tabsEl) return null;
+    tabs.forEach(function (t, i) {
+      var a = el('a', 'tab' + (i === 0 ? ' active' : ''), t.label);
+      a.href = '#' + t.id;
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        scrollLock = true; clearTimeout(lockTimer); lockTimer = setTimeout(function () { scrollLock = false; }, 900);
+        setActive(tabsEl, a);
+        scrollToCat(t.id, true);
+        history.replaceState(null, '', '#' + t.id);
+      });
+      tabsEl.appendChild(a);
+    });
+    return tabsEl;
+  }
+
+  function setActive(tabsEl, tab) {
+    tabsEl.querySelectorAll('.tab.active').forEach(function (x) { x.classList.remove('active'); });
+    tab.classList.add('active');
+    var target = tab.offsetLeft - (tabsEl.clientWidth - tab.offsetWidth) / 2;
+    tabsEl.scrollTo({ left: target, behavior: prefersReduced() ? 'auto' : 'smooth' });
+  }
+
+  function spy(tabsEl) {
+    var secs = document.querySelectorAll('.cat');
+    if (!tabsEl || !secs.length || !('IntersectionObserver' in window)) return;
+    var bar = document.querySelector('.navbar');
+    var top = (bar ? bar.offsetHeight : 56) + 12;
+    var io = new IntersectionObserver(function (entries) {
+      if (scrollLock) return;
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var tab = tabsEl.querySelector('a[href="#' + en.target.id + '"]');
+        if (tab) setActive(tabsEl, tab);
+      });
+    }, { rootMargin: '-' + top + 'px 0px -62% 0px', threshold: 0 });
+    secs.forEach(function (s) { io.observe(s); });
+  }
+
+  function finish(pageKey, tabsEl) {
+    spy(tabsEl);
+    window.TL.afterRender(pageKey);
+    var h = location.hash;
+    if (h && h.indexOf('#cat-') === 0) {
+      var tab = tabsEl && tabsEl.querySelector('a[href="' + h + '"]');
+      requestAnimationFrame(function () { scrollToCat(h.slice(1), false); if (tab) setActive(tabsEl, tab); });
+    }
+  }
+
+  /* ---------------- API pubblica ---------------- */
+  /** Ristorante, Pizzeria, Bar. opts: { key, tasting } */
+  window.renderMenu = function (data, opts) {
+    opts = opts || {};
+    var key = opts.key;
+    var lang = window.TL.lang;
+    var tr = window.TL.tr(key);
+    var container = document.getElementById('menu-container');
+    if (!data || !container) return;
+
+    var pt = PAGE_TEXT[key] && PAGE_TEXT[key][lang];
+    var tabs = [];
+    var frag = document.createDocumentFragment();
+
+    if (opts.tasting) {
+      var tsec = tastingSection(opts.tasting);
+      frag.appendChild(tsec);
+      tabs.push({ id: 'cat-degustazioni', label: window.TL.t('tasting') });
     }
 
-    block.innerHTML = html;
-    container.appendChild(block);
-  });
-
-  if (data[activeKey]) {
-    document.getElementById('page-title').textContent = data[activeKey].title;
-  }
-
-  // Animate in the visible block
-  const activeBlock = document.querySelector('.special-menu-block.active');
-  if (activeBlock) {
-    activeBlock.style.opacity = '0';
-    activeBlock.style.transform = 'translateY(12px)';
-    requestAnimationFrame(() => {
-      activeBlock.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
-      activeBlock.style.opacity = '1';
-      activeBlock.style.transform = 'translateY(0)';
-    });
-  }
-}
-
-/* -------------------------------------------------------
-   Scroll-spy: highlight tab matching the visible section
-   and center it inside the scrollable tab bar
-------------------------------------------------------- */
-function initScrollSpy() {
-  const tabsEl   = document.getElementById('cat-tabs');
-  const sections = document.querySelectorAll('.cat-section');
-  if (!tabsEl || !sections.length) return;
-
-  // How tall the sticky tabs bar is (used for rootMargin)
-  const TABS_H = tabsEl.offsetHeight + 16;
-
-  const observer = new IntersectionObserver(entries => {
-    // Skip observer updates while a tab click is driving the scroll
-    if (_clickScrolling) return;
-
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const id  = entry.target.id;
-      const tab = tabsEl.querySelector(`a[href="#${id}"]`);
-      if (!tab) return;
-
-      // Update active class
-      tabsEl.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      // Smooth-scroll the tab into center of the tab bar
-      centerTab(tab);
-    });
-  }, {
-    rootMargin: `-${TABS_H}px 0px -55% 0px`,
-    threshold: 0
-  });
-
-  sections.forEach(s => observer.observe(s));
-}
-
-/* -------------------------------------------------------
-   initFab: floating "back to menu" button that appears
-   when the user has scrolled past the sticky header
-------------------------------------------------------- */
-function initFab() {
-  const fab = document.createElement('a');
-  fab.href      = 'index.html';
-  fab.className = 'fab-back';
-  fab.setAttribute('aria-label', 'Torna al Menù');
-  fab.innerHTML = `
-    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M11 4 L6 9 L11 14" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    Menù
-  `;
-  document.body.appendChild(fab);
-
-  // Show/hide based on scroll position
-  const header = document.querySelector('.site-header');
-  const threshold = header ? header.offsetHeight + 20 : 80;
-
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        if (window.scrollY > threshold) {
-          fab.classList.add('visible');
-        } else {
-          fab.classList.remove('visible');
+    data.categories.forEach(function (cat) {
+      var name = (tr && tr.cats && tr.cats[cat.id]) || cat.name;
+      var sec = el('section', 'cat');
+      sec.id = 'cat-' + cat.id;
+      sec.appendChild(makeHead(name, cat.note));
+      cat.items.forEach(function (item) {
+        if (item.sub) {
+          var s = (tr && tr.subs && tr.subs[window.TL.slugify(item.sub)]) || item.sub;
+          sec.appendChild(el('h3', 'sub', s));
         }
-        ticking = false;
+        sec.appendChild(dishNode(item, tr));
       });
-      ticking = true;
-    }
-  }, { passive: true });
-}
-
-/* -------------------------------------------------------
-   centerTab: scroll a tab to center inside its container
-------------------------------------------------------- */
-function centerTab(tab) {
-  const bar = tab.closest('.cat-tabs');
-  if (!bar) return;
-  const targetScroll = tab.offsetLeft - bar.offsetWidth / 2 + tab.offsetWidth / 2;
-  bar.scrollTo({ left: targetScroll, behavior: 'smooth' });
-}
-
-/* -------------------------------------------------------
-   animateSections: fade-in + slide-up each section
-   on first paint (staggered)
-------------------------------------------------------- */
-function animateSections() {
-  const sections = document.querySelectorAll('.cat-section');
-  sections.forEach((section, i) => {
-    section.style.opacity    = '0';
-    section.style.transform  = 'translateY(18px)';
-    section.style.transition = 'none';
-  });
-
-  // Double RAF: first frame sets initial state, second triggers transition
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      sections.forEach((section, i) => {
-        section.style.transition = `opacity 0.4s ease ${i * 0.05}s, transform 0.4s ease ${i * 0.05}s`;
-        section.style.opacity    = '1';
-        section.style.transform  = 'translateY(0)';
-      });
+      if (cat.footnote) sec.appendChild(el('p', 'cat-foot', cat.footnote));
+      frag.appendChild(sec);
+      tabs.push({ id: sec.id, label: name });
     });
-  });
-}
+
+    container.appendChild(frag);
+    var tabsEl = mountChrome(pt ? pt[0] : data.title, pt ? pt[1] : data.subtitle, tabs);
+    finish(key, tabsEl);
+  };
+
+  /** Carta dei vini (struttura con produttore, note, bottiglia/calice). */
+  window.renderWine = function (data) {
+    var container = document.getElementById('menu-container');
+    if (!data || !container) return;
+    var tabs = [], frag = document.createDocumentFragment();
+    data.categories.forEach(function (cat) {
+      var name = sentence(cat.name);
+      var sec = el('section', 'cat');
+      sec.id = 'cat-' + cat.id;
+      sec.appendChild(makeHead(name, cat.note));
+      cat.items.forEach(function (it) { sec.appendChild(wineNode(it)); });
+      frag.appendChild(sec);
+      tabs.push({ id: sec.id, label: tabLabel(name) });
+    });
+    container.appendChild(frag);
+    var tabsEl = mountChrome(data.title, (data.subtitle || '').replace(/^"|"$/g, ''), tabs);
+    finish(null, tabsEl);
+  };
+})();

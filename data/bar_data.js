@@ -1,497 +1,239 @@
 /**
  * ============================================================
- *  TABELLA BAR — Hotel Touring Livigno
- *  Modifica nome, desc e price di ogni voce.
+ * BAR — Hotel Touring Livigno · Inverno 2026
+ * Campi: name, desc, allergens (codici EU, es. "1-7"), price (come stampato, es. "7,50").
+ * sub: titolo di sottogruppo, sulla prima voce del gruppo.
+ * Le traduzioni EN/DE stanno in data/i18n/ (non modificare qui).
  * ============================================================
  */
 
 const BAR_DATA = {
   title: "Bar",
-  subtitle: "Caffetteria, dolci, gelato, bibite, vini, cocktail e spiriti",
+  subtitle: "Caffetteria, dolci, gelato, bibite, vini, cocktail e distillati",
 
   categories: [
-
-    // --------------------------------------------------------
-    // CAFFETTERIA
-    // --------------------------------------------------------
     {
-      id: "caffe",
-      name: "CAFFETTERIA",
+      id: "caffetteria",
+      name: "Caffetteria",
+      note: "Caffè, cioccolate e bevande calde",
       items: [
-        { name: "Espresso",                 desc: "",                                           price: "1.40" },
-        { name: "Americano",                desc: "",                                           price: "2.00" },
-        { name: "Decaffeinato",             desc: "",                                           price: "1.60" },
-        { name: "Doppio",                   desc: "",                                           price: "2.80" },
-        { name: "Corretto",                 desc: "",                                           price: "2.00" },
-        { name: "Orzo",                     desc: "Piccolo / grande",                           price: "1.50 / 2.00" },
-        { name: "Ginseng",                  desc: "Piccolo / grande",                           price: "1.60 / 2.50" },
-        { name: "Cappuccino",               desc: "Variazioni disponibili +€ 0.50",             price: "2.00" },
-        { name: "Latte bianco",             desc: "",                                           price: "1.50" },
-        { name: "Latte macchiato",          desc: "",                                           price: "2.00" },
-        { name: "Marocchino",               desc: "",                                           price: "2.00" },
-        { name: "Tè & tisane",              desc: "",                                           price: "3.50" },
-        { name: "Caffè shakerato",          desc: "Correzione alcolica +€ 1.00",                price: "4.00" },
-        { name: "Bombardino",               desc: "Vov, latte, panna",                          price: "5.00" },
-        { name: "Lumumba",                  desc: "Cioccolata, rum, panna montata",              price: "5.00" },
-        { name: "Jägertee",                 desc: "",                                           price: "4.00" },
-        { name: "Punch al liquore",         desc: "",                                           price: "4.00" },
-        { name: "Vin brûlé",                desc: "",                                           price: "5.00" },
-        { name: "Calimero",                 desc: "Vov, latte, brandy, panna, whiskey, caffè",  price: "6.00" },
-        { name: "Irish Coffee",             desc: "Caffè, irish whiskey, panna fresca",         price: "7.00" }
+        { sub: "Caffetteria", name: "Espresso", price: "1,40" },
+        { name: "Americano", price: "2,00" },
+        { name: "Decaffeinato", price: "1,80" },
+        { name: "Doppio", price: "2,80" },
+        { name: "Corretto", price: "2,00" },
+        { name: "Orzo", price: "1,50/2,00" },
+        { name: "Ginseng", price: "1,60/2,50" },
+        { name: "Cappuccino", desc: "Soia, decaffeinato o orzo · 2,50", price: "2,00" },
+        { name: "Latte bianco", price: "1,50" },
+        { name: "Latte macchiato", price: "2,00" },
+        { name: "Marocchino", price: "2,00" },
+        { name: "Tè, camomilla, tisana", price: "3,00" },
+        { name: "Caffè shakerato", desc: "Alcolico a scelta · 4,00", price: "3,00" },
+        { sub: "Cioccolate", name: "Classica al latte", price: "3,50" },
+        { name: "Fondente", price: "4,00" },
+        { name: "Bianca", price: "4,00" },
+        { name: "Aggiunta panna", price: "+ 0,50" },
+        { sub: "Invernali", name: "Jägertee", price: "4,00" },
+        { name: "Punch al liquore", desc: "Arancia, mandarino, rum", price: "3,50" },
+        { name: "Vin brulé", desc: "Alcolico", price: "4,00" },
+        { name: "Mela brulé", desc: "Analcolico", price: "4,00" },
+        { sub: "Con un goccio", name: "Bombardino", desc: "VOV, brandy, cognac, panna", price: "4,00" },
+        { name: "Lumumba", desc: "Cioccolata, rum, panna", price: "5,00" },
+        { name: "Calimero", desc: "Bombardino + caffè", price: "5,00" },
+        { name: "Irish coffee", price: "7,00" },
       ]
     },
-
-    // --------------------------------------------------------
-    // YOGURT LOCALE
-    // --------------------------------------------------------
-    {
-      id: "yogurt",
-      name: "YOGURT LOCALE",
-      items: [
-        { name: "Liscio",             desc: "",  price: "3.50" },
-        { name: "+ Miele",            desc: "",  price: "+0.50" },
-        { name: "+ Cereali",          desc: "",  price: "+0.50" },
-        { name: "+ Fragole",          desc: "",  price: "+2.50" },
-        { name: "+ Frutti di bosco",  desc: "",  price: "+3.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // CREMA CAFFÈ
-    // --------------------------------------------------------
-    {
-      id: "crema-caffe",
-      name: "CREMA CAFFÈ",
-      note: "Piccolo / grande",
-      items: [
-        { name: "Classica",      desc: "", price: "2.50 / 3.50" },
-        { name: "Nero fondente", desc: "", price: "3.00 / 4.00" },
-        { name: "Bianca",        desc: "", price: "3.00 / 4.00" },
-        { name: "Cremino",       desc: "", price: "3.00 / 4.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // CIOCCOLATA
-    // --------------------------------------------------------
-    {
-      id: "cioccolata",
-      name: "CIOCCOLATA",
-      note: "Panna aggiuntiva +€ 0.50",
-      items: [
-        { name: "Al latte",  desc: "", price: "4.00" },
-        { name: "Fondente",  desc: "", price: "4.50" },
-        { name: "Bianca",    desc: "", price: "4.50" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // CREPES
-    // --------------------------------------------------------
-    {
-      id: "crepes",
-      name: "CRÊPES",
-      special: true,
-      items: [
-        { name: "Base",                                          desc: "Nutella, albicocca o frutti di bosco",  price: "5.00" },
-        { name: "+ Cocco / panna",                               desc: "",                                      price: "+0.50" },
-        { name: "+ Gelato, mirtilli / fragole fresche / banana", desc: "",                                      price: "+2.00" },
-        { name: "+ Fragola / cioccolato / frutti di bosco",      desc: "",                                      price: "+0.50" },
-        { name: "+ Gran Marnier",                                desc: "",                                      price: "+2.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // AFFOGATI
-    // --------------------------------------------------------
-    {
-      id: "affogati",
-      name: "AFFOGATI",
-      items: [
-        { name: "Caffè",              desc: "", price: "5.00" },
-        { name: "Cioccolato",         desc: "", price: "6.00" },
-        { name: "Amaretto Disaronno", desc: "", price: "6.00" },
-        { name: "Braulio",            desc: "", price: "6.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // DOLCI & SNACK
-    // --------------------------------------------------------
     {
       id: "dolci",
-      name: "DOLCI & SNACK",
+      name: "Dolci e gelati",
+      note: "Coppe, crepes e dolci",
       items: [
-        { name: "Brioche",                    desc: "",  price: "1.50" },
-        { name: "Biscotto occhio di bue",     desc: "",  price: "2.00" },
-        { name: "Biscotti semplici",          desc: "",  price: "1.00" },
-        { name: "Strudel di mele",            desc: "",  price: "7.00" },
-        { name: "Tiramisù",                   desc: "",  price: "7.00" },
-        { name: "Macedonia",                  desc: "",  price: "6.00" },
-        { name: "Crostata",                   desc: "",  price: "6.00" },
-        { name: "Gelato — 1 / 2 palline",     desc: "",  price: "1.80 / 2.50" }
+        { sub: "Affogati", name: "Caffè", price: "5,00" },
+        { name: "Cioccolato", price: "6,00" },
+        { name: "Amaretto Disaronno", price: "6,00" },
+        { name: "Braulio", price: "6,00" },
+        { sub: "Crepes", name: "Crepes", desc: "Nutella, albicocca, frutti di bosco, zucchero", price: "5,00" },
+        { name: "Aggiunte", desc: "Panna, gelato, scaglie di cocco", price: "+ 0,50" },
+        { name: "Aggiunte", desc: "Banana, macedonia", price: "+ 1,00" },
+        { name: "Topping", desc: "Fragola, cioccolato, frutti di bosco", price: "+ 0,50" },
+        { name: "Grand Marnier", price: "+ 2,00" },
+        { sub: "Coppe gelato", name: "Gelato", desc: "1 pallina / 2 palline", price: "1,80/2,50" },
+        { name: "Coppa Danemark", desc: "Gelato alla vaniglia, gelato e topping al cioccolato, panna", price: "6,00" },
+        { name: "Coppa Arlecchino", desc: "Gelato fragola e vaniglia, topping alla frutta, macedonia, panna", price: "7,00" },
+        { name: "Coppa Meringata", desc: "Gelato alla vaniglia, meringhe, topping al cioccolato, panna montata", price: "6,00" },
+        { name: "Frappè", price: "5,00" },
+        { sub: "Dolci e snack", name: "Brioche", price: "1,50" },
+        { name: "Biscotto occhio di bue", price: "2,00" },
+        { name: "Biscotti semplici", price: "1,00" },
+        { name: "Strudel di mele + gelato", price: "8,00" },
+        { name: "Tiramisù", price: "7,00" },
+        { name: "Macedonia", price: "5,00" },
+        { name: "Crostata", price: "6,00" },
+        { name: "Sacher", price: "7,00" },
+        { name: "Sorbetto al limone", desc: "Analcolico / alcolico", price: "6,00/8,00" },
+        { name: "Sorbetto al braulio", price: "8,00" },
       ]
     },
-
-    // --------------------------------------------------------
-    // COPPE GELATO
-    // --------------------------------------------------------
     {
-      id: "gelato",
-      name: "COPPE GELATO",
-      note: "Panna +€ 0.50 · Gelato +€ 1.00",
+      id: "bibite",
+      name: "Bibite e birre",
+      note: "Bibite, succhi e birre",
       items: [
-        { name: "Coppa Danemark",   desc: "Gelato alla vaniglia, topping al cioccolato, panna",              price: "6.00" },
-        { name: "Coppa Arlecchino", desc: "Gelato alla frutta, topping ai frutti di bosco, macedonia, panna", price: "7.00" },
-        { name: "Coppa Meringata",  desc: "Gelato alla panna, meringhe, topping al cioccolato, panna",        price: "6.00" },
-        { name: "Coppa Fantasy",    desc: "Gelato alla frutta, panna, topping ai frutti di bosco",            price: "6.00" },
-        { name: "Frappè",           desc: "",                                                                 price: "5.00" },
-        { name: "Mirtilli freschi", desc: "",                                                                 price: "6.00" }
+        { sub: "Acqua e bibite", name: "Acqua", desc: "25/50/75 cl", price: "1/2/3" },
+        { name: "Acqua e sciroppi", price: "2,00" },
+        { name: "Bibite in lattina", desc: "Fuze Tea pesca / limone, Red Bull", price: "3,50/4,00" },
+        { name: "Bibite in vetro", desc: "Coca-Cola, Coca-Cola Zero, Fanta, Sprite", price: "4,00" },
+        { name: "Bibite Lurisia", desc: "Limonata, Chinotto, Aranciata amara", price: "4,00" },
+        { name: "Bibite alla spina", desc: "30/40 cl · Coca-Cola, Fuze Tea, Fanta, Sprite", price: "3,50/4,00" },
+        { sub: "Succhi", name: "Succhi di frutta", desc: "Ace, albicocca, ananas, arancia, mela, mirtillo, pera, pesca, pompelmo", price: "3,50" },
+        { name: "Spremuta d'arancia", price: "4,00" },
+        { sub: "Birre alla spina", name: "Birra Nastro Azzurro", desc: "30/50 cl", price: "3,50/6,00" },
+        { name: "Panachè", desc: "30/50 cl", price: "3,50/6,00" },
+        { name: "Radler", desc: "30/50 cl", price: "3,50/6,00" },
+        { sub: "Birre in bottiglia", name: "Corona", price: "4,00" },
+        { name: "Heineken", price: "4,00" },
+        { name: "Chimay", price: "5,50" },
+        { name: "1816 Livigno", desc: "Bionda, di frumento, chiara, IPA", price: "7,00" },
+        { name: "Paulaner Weizen", price: "6,00" },
+        { name: "Moretti analcolica", price: "4,00" },
+        { name: "Erdinger analcolica", price: "5,00" },
       ]
     },
-
-    // --------------------------------------------------------
-    // BEVANDE
-    // --------------------------------------------------------
     {
-      id: "bevande",
-      name: "BEVANDE",
+      id: "vini",
+      name: "Vini al calice",
+      note: "Rosso, bianco e bollicine",
       items: [
-        { name: "Acqua 0,5 L",        desc: "",                                                    price: "2.00" },
-        { name: "Acqua e sciroppi",    desc: "",                                                    price: "2.00" },
-        { name: "Bibite in lattina",   desc: "",                                                    price: "4.00" },
-        { name: "Bibite Lurisia",      desc: "Limonata, Chinotto, Aranciata amara",                 price: "4.00" },
-        { name: "Bibite alla spina",   desc: "0,3 / 0,4 L",                                        price: "3.00 / 4.00" },
-        { name: "Succhi di frutta",    desc: "",                                                    price: "6.00" },
-        { name: "Spremuta d'arancia",  desc: "",                                                    price: "3.50" },
-        { name: "Birra Calanda",       desc: "",                                                    price: "4.00" },
-        { name: "Panachè",             desc: "0,3 / 0,5 L",                                        price: "3.50 / 6.00" }
+        { sub: "Rosso", name: "Sassella di Valtellina", desc: "Nebbiolo di montagna: elegante, note di frutti rossi e spezie", price: "6,00" },
+        { name: "Sforzato di Valtellina", desc: "Da uve appassite: intenso, caldo e strutturato", price: "12,00" },
+        { name: "Valpolicella Ripasso", desc: "Morbido e speziato, note di ciliegia matura", price: "8,00" },
+        { name: "Amarone", desc: "Potente e vellutato, frutta matura e spezie", price: "12,00" },
+        { sub: "Bianco", name: "Pinot Grigio", desc: "Fresco e leggero, note di pera e fiori bianchi", price: "6,00" },
+        { name: "Lugana", desc: "Sapido e fresco, agrumi e mandorla", price: "7,00" },
+        { name: "Sauvignon", desc: "Aromatico e vivace, agrumi e note erbacee", price: "7,00" },
+        { name: "Chardonnay", desc: "Morbido e rotondo, frutta a polpa gialla", price: "7,00" },
+        { sub: "Bollicine e rosé", name: "Franciacorta", desc: "Metodo classico: perlage fine, crosta di pane e frutta bianca", price: "8,00" },
+        { name: "Prosecco", desc: "Fresco e fruttato, mela e fiori", price: "6,00" },
+        { name: "Lagrain Rosé", desc: "Rosato fruttato e fresco, fragola e piccoli frutti rossi", price: "7,00" },
       ]
     },
-
-    // --------------------------------------------------------
-    // BIRRE IN BOTTIGLIA
-    // --------------------------------------------------------
     {
-      id: "birre",
-      name: "BIRRE IN BOTTIGLIA",
+      id: "cocktails",
+      name: "Cocktails",
+      note: "Classici, speciali e analcolici",
+      footnote: "* In alternativa a Campari o Aperol puoi provare Vetta Rossa, il primo bitter valtellinese: a metà tra i due, più dolce e delicato del Campari, con una piacevole nota amaricante.",
       items: [
-        { name: "Corona",                      desc: "",                              price: "5.00" },
-        { name: "Heineken",                    desc: "",                              price: "5.00" },
-        { name: "Chimay",                      desc: "",                              price: "6.00" },
-        { name: "1816 Livigno",                desc: "Pils, Weiss, IPA",             price: "7.00" },
-        { name: "Paulaner Weizen",             desc: "",                              price: "6.00" },
-        { name: "Moretti analcolica",          desc: "",                              price: "4.00" },
-        { name: "Weiss analcolica Erdinger",   desc: "",                              price: "5.00" }
+        { sub: "Classici", name: "Hugo Spritz", price: "7,50" },
+        { name: "Aperol Spritz*", price: "7,50" },
+        { name: "Negroni*", price: "8,50" },
+        { name: "Americano*", price: "8,50" },
+        { name: "Cuba Libre", price: "8,50" },
+        { name: "Long Island Ice Tea", price: "8,50" },
+        { name: "Margarita", price: "8,50" },
+        { name: "Moscow Mule", price: "8,50" },
+        { name: "Sex on the Beach", price: "8,50" },
+        { name: "Espresso Martini", price: "8,50" },
+        { name: "Cuban mojito", price: "9,00" },
+        { sub: "Speciali", name: "Livignasc", desc: "Taneda, Braulio, vodka, sciroppo di zucchero, succo di lime, Sprite", price: "10,00" },
+        { name: "Taneda spritz", desc: "Taneda, prosecco, soda", price: "7,50" },
+        { name: "Sour a scelta", desc: "Base alcolica a scelta, zucchero, foamer", price: "8,50" },
+        { sub: "Analcolici", name: "Il Biondo", desc: "Succo di limone, succo di pompelmo, succo d'arancia", price: "7,00" },
+        { name: "Shake on the Peach", desc: "Succo d'arancia, succo di limone, sciroppo di cranberry, tè alla pesca", price: "7,00" },
+        { name: "Tramonto", desc: "Succo d'ananas, succo d'arancia, granatina", price: "7,00" },
       ]
     },
-
-    // --------------------------------------------------------
-    // VINO A CALICE
-    // --------------------------------------------------------
     {
-      id: "vini-calice",
-      name: "VINO A CALICE",
+      id: "gin",
+      name: "Gin tonic",
+      note: "Con tonica Fever-Tree",
       items: [
-        { name: "Sassella di Valtellina",  desc: "Rosso",     price: "6.00" },
-        { name: "Sforzato di Valtellina",  desc: "Rosso",     price: "12.00" },
-        { name: "Valpolicella Ripasso",    desc: "Rosso",     price: "8.00" },
-        { name: "Amarone",                 desc: "Rosso",     price: "12.00" },
-        { name: "Pinot Grigio",            desc: "Bianco",    price: "6.00" },
-        { name: "Lugana",                  desc: "Bianco",    price: "7.00" },
-        { name: "Sauvignon",               desc: "Bianco",    price: "7.00" },
-        { name: "Chardonnay",              desc: "Bianco",    price: "7.00" },
-        { name: "Franciacorta",            desc: "Bollicine", price: "8.00" },
-        { name: "Prosecco",                desc: "Bollicine", price: "6.00" },
-        { name: "Lagrein Rosé",            desc: "Rosato",    price: "7.00" }
+        { sub: "Gin locali", name: "Daugin", desc: "Floreale e fresco: menta, camomilla e lavanda. Gusto elegante, morbido e aromatico.", price: "14,00" },
+        { name: "Gingiat", desc: "Secco e strutturato: ginepro balsamico, lavanda e agrumi. Gusto pulito ed equilibrato.", price: "14,00" },
+        { name: "Selvadeg Gin", desc: "Fruttato e speziato: mela, scorza di limone e cannella. Delicato ma deciso.", price: "14,00" },
+        { name: "Piripigin", desc: "Mandarino, arancio, mela e cannella. Elegante e fresco, finale morbido grazie allo Sforzato di Valtellina.", price: "14,00" },
+        { name: "1816 Livigno", desc: "Ginepro alpino, profumo di montagna e sottobosco. Complesso ma morbido, beva fresca e fragrante.", price: "12,00" },
+        { name: "Il Pioniere", desc: "In onore dell'inventore della motoslitta. Distillato a base di achillea moscata, la stessa erba alla base della Taneda.", price: "14,00" },
+        { sub: "Gin tonic", name: "Gordon's London Dry", price: "8,00" },
+        { name: "Adamus", price: "16,00" },
+        { name: "Hendrick's", price: "12,00" },
+        { name: "Gin Mare", price: "12,00" },
+        { name: "Bulldog", price: "10,00" },
+        { name: "Bombay", price: "10,00" },
+        { name: "Malfy Rosa", price: "13,50" },
+        { name: "Hetsu", price: "14,00" },
       ]
     },
-
-    // --------------------------------------------------------
-    // GIN TONIC
-    // --------------------------------------------------------
-    {
-      id: "gin-tonic",
-      name: "GIN TONIC",
-      items: [
-        { name: "Gordon's London Dry",  desc: "", price: "8.00" },
-        { name: "1816 Livigno",         desc: "", price: "12.00" },
-        { name: "Adamus",               desc: "", price: "16.00" },
-        { name: "Il Pioniere",          desc: "", price: "15.00" },
-        { name: "Mandarin Shanghi",     desc: "", price: "15.00" },
-        { name: "Hendrick's",           desc: "", price: "12.00" },
-        { name: "Gin Mare",             desc: "", price: "12.00" },
-        { name: "Bulldog",              desc: "", price: "10.00" },
-        { name: "Bombay",               desc: "", price: "10.00" },
-        { name: "Malfy Rosa",           desc: "", price: "13.50" },
-        { name: "Hetsu",                desc: "", price: "14.00" },
-        { name: "Cubical",              desc: "", price: "14.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // I CLASSICI
-    // --------------------------------------------------------
-    {
-      id: "cocktails-classici",
-      name: "I CLASSICI",
-      items: [
-        { name: "Hugo Spritz",          desc: "Prosecco, succo di lime, liquore al sambuco, soda, menta",                    price: "7.50" },
-        { name: "Aperol Spritz",        desc: "Aperol, prosecco, soda",                                                      price: "7.50" },
-        { name: "Negroni",              desc: "Gin, vermouth rosso, Campari",                                                price: "8.50" },
-        { name: "Americano",            desc: "Vermouth rosso, Campari, soda",                                               price: "8.50" },
-        { name: "Cuba Libre",           desc: "Rum bianco, succo di lime, cola",                                             price: "8.50" },
-        { name: "Long Island Iced Tea", desc: "Vodka, tequila, gin, Cointreau, rum bianco, succo di limone, sciroppo, cola", price: "8.50" },
-        { name: "Margarita",            desc: "Tequila, Triple Sec, succo di lime",                                          price: "8.50" },
-        { name: "Moscow Mule",          desc: "Vodka, ginger beer, succo di lime",                                           price: "8.50" },
-        { name: "Sex on the Beach",     desc: "Vodka, liquore alla pesca, succo d'arancia, sciroppo di cranberry",           price: "8.50" },
-        { name: "Espresso Martini",     desc: "Caffè, vodka, Kahlúa, sciroppo di zucchero",                                  price: "8.50" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // COCKTAILS SPECIALI
-    // --------------------------------------------------------
-    {
-      id: "cocktails-speciali",
-      name: "COCKTAILS SPECIALI",
-      items: [
-        {
-          name: "Livignasc",
-          desc: "Taneda, Braulio, vodka, sciroppo di zucchero, succo di lime, Sprite",
-          price: "11.00"
-        },
-        {
-          name: "Jager Grape",
-          desc: "Jägermeister, soda al pompelmo, spremuta d'arancia",
-          price: "11.00"
-        },
-        {
-          name: "Taneda Spritz",
-          desc: "Taneda, prosecco, soda",
-          price: "11.00"
-        },
-        {
-          name: "Caipiroska alla fragola",
-          desc: "Vodka, liquore alle fragole, lime, fragole, sciroppo di zucchero",
-          price: "11.00"
-        },
-        {
-          name: "Sour a scelta",
-          desc: "Base alcolica a scelta, zucchero, foamer",
-          price: "11.00"
-        },
-        {
-          name: "Cuban Mojito",
-          desc: "Rum Havana 3, succo di lime, sciroppo di zucchero, menta, soda",
-          price: "11.00"
-        },
-        {
-          name: "Tequila Sunrise",
-          desc: "Tequila, succo d'arancia, granatina",
-          price: "11.00"
-        }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // ANALCOLICI
-    // --------------------------------------------------------
-    {
-      id: "analcolici",
-      name: "ANALCOLICI",
-      items: [
-        { name: "Tramonto",           desc: "Succo di ananas e arancia, granatina",             price: "7.00" },
-        { name: "Biondo",             desc: "Succo di arancia e limone, pompelmo",               price: "7.00" },
-        { name: "Shake on the Peach", desc: "Cranberry, tè alla pesca, succo d'arancia",         price: "7.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // AMARI
-    // --------------------------------------------------------
     {
       id: "amari",
-      name: "AMARI",
+      name: "Amari e distillati",
+      note: "Amari, liquori e distillati",
       items: [
-        { name: "Braulio",          desc: "", price: "5.00" },
-        { name: "Braulio Riserva",  desc: "", price: "6.00" },
-        { name: "Brancamenta",      desc: "", price: "4.00" },
-        { name: "Fernet Branca",    desc: "", price: "4.00" },
-        { name: "Cynar",            desc: "", price: "4.00" },
-        { name: "Ramazzotti",       desc: "", price: "4.00" },
-        { name: "Averna",           desc: "", price: "4.00" },
-        { name: "Montenegro",       desc: "", price: "4.00" },
-        { name: "Jägermeister",     desc: "", price: "4.00" },
-        { name: "Disaronno",        desc: "", price: "4.00" },
-        { name: "Limoncello",       desc: "", price: "4.00" },
-        { name: "Amaro del Capo",   desc: "", price: "5.00" }
+        { sub: "Amari locali", name: "Braulio", price: "5,00" },
+        { name: "Braulio Riserva", price: "6,00" },
+        { name: "Taneda", price: "4,00" },
+        { name: "Federia", price: "6,00" },
+        { sub: "Amari", name: "Brancamenta", price: "4,00" },
+        { name: "Fernet Branca", price: "4,00" },
+        { name: "Cynar", price: "4,00" },
+        { name: "Ramazzotti", price: "4,00" },
+        { name: "Averna", price: "4,00" },
+        { name: "Montenegro", price: "4,00" },
+        { name: "Jägermeister", price: "4,00" },
+        { name: "Disaronno", price: "4,00" },
+        { name: "Limoncello", price: "4,00" },
+        { name: "Amaro del Capo", price: "5,00" },
+        { sub: "Brandy e cognac", name: "Vecchia Romagna", price: "4,00" },
+        { name: "Fundador", price: "5,00" },
+        { name: "Courvoisier", price: "6,00" },
+        { name: "Remy Martin VSOP", price: "8,00" },
+        { sub: "Rum", name: "Zacapa 23 anni", price: "10,00" },
+        { name: "Havana 7", price: "6,00" },
+        { name: "Diplomatico Añejo", price: "7,00" },
+        { sub: "Vodka", name: "Smirnoff", price: "4,00" },
+        { name: "Belvedere", price: "7,00" },
+        { name: "Beluga", price: "8,00" },
+        { sub: "Whiskey", name: "Jack Daniel's", price: "5,00" },
+        { name: "Wild Turkey", price: "6,00" },
+        { name: "Long Branch", price: "7,00" },
+        { name: "Jameson", price: "5,00" },
+        { sub: "Scotch", name: "Johnnie Walker Red Label", price: "5,00" },
+        { name: "Chivas Regal", price: "6,00" },
+        { name: "Ballantine's", price: "6,00" },
+        { name: "The Balvenie", price: "6,00" },
+        { name: "Dimple", price: "7,00" },
+        { name: "Caol Ila 12 anni", price: "8,00" },
+        { sub: "Vermouth", name: "Carpano Rosso", price: "5,00" },
+        { name: "Martini Bianco", price: "5,00" },
+        { name: "Martini Dry", price: "5,00" },
       ]
     },
-
-    // --------------------------------------------------------
-    // BRANDY
-    // --------------------------------------------------------
-    {
-      id: "brandy",
-      name: "BRANDY",
-      items: [
-        { name: "Vecchia Romagna", desc: "", price: "4.00" },
-        { name: "Fundador",        desc: "", price: "5.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // COGNAC
-    // --------------------------------------------------------
-    {
-      id: "cognac",
-      name: "COGNAC",
-      items: [
-        { name: "Courvoisier",      desc: "", price: "6.00" },
-        { name: "Remy Martin VSOP", desc: "", price: "8.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // RUM
-    // --------------------------------------------------------
-    {
-      id: "rum",
-      name: "RUM",
-      items: [
-        { name: "Zacapa 23 anni",      desc: "", price: "10.00" },
-        { name: "Havana 7",            desc: "", price: "6.00" },
-        { name: "Diplomatico Añejo",   desc: "", price: "7.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // VODKA
-    // --------------------------------------------------------
-    {
-      id: "vodka",
-      name: "VODKA",
-      items: [
-        { name: "Sky",       desc: "", price: "4.00" },
-        { name: "Belvedere", desc: "", price: "7.00" },
-        { name: "Beluga",    desc: "", price: "8.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // BOURBON
-    // --------------------------------------------------------
-    {
-      id: "bourbon",
-      name: "BOURBON",
-      items: [
-        { name: "Wild Turkey", desc: "", price: "6.00" },
-        { name: "Long Branch", desc: "", price: "7.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // IRISH
-    // --------------------------------------------------------
-    {
-      id: "irish",
-      name: "IRISH",
-      items: [
-        { name: "Jameson", desc: "", price: "5.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // BLENDED SCOTCH
-    // --------------------------------------------------------
-    {
-      id: "blended-scotch",
-      name: "BLENDED SCOTCH",
-      items: [
-        { name: "Johnnie Walker Red Label", desc: "", price: "5.00" },
-        { name: "Chivas Regal",             desc: "", price: "6.00" },
-        { name: "Ballantine's",             desc: "", price: "6.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // SCOTCH SINGLE MALT
-    // --------------------------------------------------------
-    {
-      id: "single-malt",
-      name: "SCOTCH SINGLE MALT",
-      items: [
-        { name: "The Balvenie", desc: "", price: "6.00" },
-        { name: "Dimple",       desc: "", price: "7.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // SCOTCH TORBATO
-    // --------------------------------------------------------
-    {
-      id: "torbato",
-      name: "SCOTCH TORBATO",
-      items: [
-        { name: "Caol Ila 12 anni", desc: "", price: "8.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // VERMOUTH
-    // --------------------------------------------------------
-    {
-      id: "vermouth",
-      name: "VERMOUTH",
-      items: [
-        { name: "Carpano Rosso", desc: "", price: "5.00" },
-        { name: "Martini Bianco", desc: "", price: "5.00" },
-        { name: "Martini Dry",    desc: "", price: "5.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // TENNESSEE
-    // --------------------------------------------------------
-    {
-      id: "tennessee",
-      name: "TENNESSEE",
-      items: [
-        { name: "Jack Daniel's", desc: "", price: "5.00" }
-      ]
-    },
-
-    // --------------------------------------------------------
-    // GRAPPE
-    // --------------------------------------------------------
     {
       id: "grappe",
-      name: "GRAPPE",
+      name: "Grappe",
+      note: "Grappe italiane",
       items: [
-        { name: "Williams",                  desc: "", price: "4.00" },
-        { name: "Mirtillo",                  desc: "", price: "4.00" },
-        { name: "La Trentina bianca",        desc: "", price: "5.00" },
-        { name: "La Trentina barricata",     desc: "", price: "5.00" },
-        { name: "Anfora",                    desc: "", price: "6.00" },
-        { name: "Moscato",                   desc: "", price: "6.00" },
-        { name: "18 Lune",                   desc: "", price: "6.00" },
-        { name: "Chardonnay",                desc: "", price: "6.00" },
-        { name: "Gewurztraminer",            desc: "", price: "7.00" },
-        { name: "18 Lune botte Porto",       desc: "", price: "7.00" },
-        { name: "18 Lune botte Whisky",      desc: "", price: "7.00" },
-        { name: "18 Lune botte Rum",         desc: "", price: "7.00" },
-        { name: "Amarone",                   desc: "", price: "7.00" },
-        { name: "Tempo bianca",              desc: "", price: "7.00" },
-        { name: "Tempo barricata",           desc: "", price: "7.00" },
-        { name: "Al Vach",                   desc: "", price: "7.00" },
-        { name: "Sforzato bianca",           desc: "", price: "8.00" },
-        { name: "Sforzato barricata",        desc: "", price: "8.00" },
-        { name: "Mela verde",                desc: "", price: "9.00" },
-        { name: "Nebbiolo",                  desc: "", price: "10.00" },
-        { name: "Trinidad Riserva",          desc: "", price: "13.00" }
+        { name: "Al Vach", price: "8,00" },
+        { name: "Williams", price: "4,00" },
+        { name: "Mirtillo", price: "4,00" },
+        { name: "La Trentina Bianca", price: "5,00" },
+        { name: "La Trentina Barricata", price: "5,00" },
+        { name: "Anfora", price: "6,00" },
+        { name: "Moscato", price: "6,00" },
+        { name: "18 Lune", price: "6,00" },
+        { name: "Chardonnay", price: "6,00" },
+        { name: "Gewürztraminer", price: "6,00" },
+        { name: "18 Lune botte Porto", price: "7,00" },
+        { name: "18 Lune botte Whisky", price: "7,00" },
+        { name: "Amarone", price: "7,00" },
+        { name: "Tempo Bianca", price: "7,00" },
+        { name: "Tempo Barricata", price: "7,00" },
+        { name: "Sforzato Bianca", price: "8,00" },
+        { name: "Sforzato Barricata", price: "8,00" },
+        { name: "Mela Verde", price: "9,00" },
+        { name: "Nebbiolo", price: "10,00" },
+        { name: "Trinidad Riserva", price: "13,00" },
       ]
     }
-
   ]
 };
