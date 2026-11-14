@@ -129,7 +129,6 @@ const BAR_DATA = {
       id: "cocktails",
       name: "Cocktails",
       note: "Classici, speciali e analcolici",
-      footnote: "* In alternativa a Campari o Aperol puoi provare Vetta Rossa, il primo bitter valtellinese: a metà tra i due, più dolce e delicato del Campari, con una piacevole nota amaricante.",
       items: [
         { sub: "Classici", name: "Hugo Spritz", price: "7,50" },
         { name: "Aperol Spritz*", price: "7,50" },
@@ -141,7 +140,7 @@ const BAR_DATA = {
         { name: "Moscow Mule", price: "8,50" },
         { name: "Sex on the Beach", price: "8,50" },
         { name: "Espresso Martini", price: "8,50" },
-        { name: "Cuban mojito", price: "9,00" },
+        { name: "Cuban mojito", price: "9,00", after: "* In alternativa a Campari o Aperol puoi provare Vetta Rossa, il primo bitter valtellinese: a metà tra i due, più dolce e delicato del Campari, con una piacevole nota amaricante." },
         { sub: "Speciali", name: "Livignasc", desc: "Taneda, Braulio, vodka, sciroppo di zucchero, succo di lime, Sprite", price: "10,00" },
         { name: "Taneda spritz", desc: "Taneda, prosecco, soda", price: "7,50" },
         { name: "Sour a scelta", desc: "Base alcolica a scelta, zucchero, foamer", price: "8,50" },

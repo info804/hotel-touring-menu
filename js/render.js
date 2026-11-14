@@ -158,8 +158,16 @@
   function finish(pageKey, tabsEl) {
     spy(tabsEl);
     window.TL.afterRender(pageKey);
-    var h = location.hash;
-    if (h && h.indexOf('#cat-') === 0) {
+    var h = location.hash, sv = null;
+    try { sv = JSON.parse(sessionStorage.getItem('tl_scroll')); sessionStorage.removeItem('tl_scroll'); } catch (e) { sv = null; }
+    if (sv && sv.p === location.pathname && typeof sv.y === 'number') {
+      // cambio lingua: resta dove sei, senza saltare alla sezione dell'indirizzo
+      try { history.scrollRestoration = 'manual'; } catch (e) { /* ignora */ }
+      var go = function () { window.scrollTo({ top: sv.y, behavior: 'instant' }); };
+      requestAnimationFrame(go);
+      window.addEventListener('load', function () { go(); setTimeout(go, 150); });
+      var main = document.querySelector('main'); if (main) main.classList.add('lang-in');
+    } else if (h && h.indexOf('#cat-') === 0) {
       var tab = tabsEl && tabsEl.querySelector('a[href="' + h + '"]');
       requestAnimationFrame(function () { scrollToCat(h.slice(1), false); if (tab) setActive(tabsEl, tab); });
     }
@@ -196,6 +204,7 @@
           sec.appendChild(el('h3', 'sub', s));
         }
         sec.appendChild(dishNode(item, tr));
+        if (item.after) sec.appendChild(el('p', 'cat-foot', item.after));
       });
       if (cat.footnote) sec.appendChild(el('p', 'cat-foot', cat.footnote));
       frag.appendChild(sec);

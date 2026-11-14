@@ -100,7 +100,7 @@
     var opener = null;
     function close() {
       if (openSheet !== api) return;
-      back.classList.remove('on'); sheet.classList.remove('on'); document.body.classList.remove('sheet-open');
+      back.classList.remove('on'); sheet.classList.remove('on'); document.documentElement.classList.remove('sheet-open');
       openSheet = null;
       setTimeout(function () { back.hidden = true; sheet.hidden = true; }, 320);
       if (opener && opener.focus) opener.focus();
@@ -109,7 +109,7 @@
       if (openSheet) return;
       opener = from || document.activeElement;
       back.hidden = false; sheet.hidden = false; openSheet = api;
-      document.body.classList.add('sheet-open');
+      document.documentElement.classList.add('sheet-open');
       requestAnimationFrame(function () { requestAnimationFrame(function () { back.classList.add('on'); sheet.classList.add('on'); }); });
       var f = sheet.querySelector('[aria-checked="true"]') || sheet.querySelector('.sheet-x');
       setTimeout(function () { if (f) f.focus(); }, 60);
@@ -134,7 +134,11 @@
   function setLang(code) {
     try { localStorage.setItem(KEY, code); } catch (e) { /* ignora */ }
     if (window.TLGT) window.TLGT.setCookie(NATIVE.indexOf(code) > -1 ? null : code);
-    location.reload();
+    // stessa posizione dopo il ricarico + dissolvenza semplice del testo
+    try { sessionStorage.setItem('tl_scroll', JSON.stringify({ p: location.pathname, y: window.scrollY })); } catch (e) { /* ignora */ }
+    if (langSheet && langSheet.close) langSheet.close();
+    document.documentElement.classList.add('lang-out');
+    setTimeout(function () { location.reload(); }, 200);
   }
   function buildLangSheet() {
     var body = document.createElement('div');
